@@ -3,10 +3,13 @@ package kz.jusan.hrapp.controller;
 import kz.jusan.hrapp.dto.MainInfoDto;
 import kz.jusan.hrapp.model.form.MainInfo;
 import kz.jusan.hrapp.service.impl.InfoServiceImpl;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/form")
@@ -21,9 +24,9 @@ public class FormController {
     }
 
     @PostMapping("/upload/maininfo/{user_id}")
-    public HashMap<String, String> uploadFile(@PathVariable("user_id") Long user_id, @RequestBody MainInfoDto mainInfoDto) {
+    public Map<String, String> uploadFile(@PathVariable("user_id") Long user_id, @RequestBody MainInfoDto mainInfoDto) {
         System.out.println("HI CONTROLLER!");
-        HashMap<String, String> answer = new HashMap<>();
+        Map<String, String> answer = new HashMap<>();
         try {
             MainInfo mainInfo = new MainInfo();
             mainInfo.setId(user_id);
