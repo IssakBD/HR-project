@@ -1,7 +1,7 @@
-package kz.jusan.hrapp.service;
+package kz.jusan.hrapp.service.impl;
 
 import java.io.IOException;
-import java.util.stream.Stream;
+import java.util.List;
 
 import kz.jusan.hrapp.model.FileDB;
 import kz.jusan.hrapp.repository.FileDBRepository;
@@ -11,10 +11,14 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class FileStorageService {
+public class FileStorageServiceImpl {
 
     @Autowired
     private FileDBRepository fileDBRepository;
+
+    public FileStorageServiceImpl(FileDBRepository fileDBRepository) {
+        this.fileDBRepository = fileDBRepository;
+    }
 
     public FileDB store(MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -27,7 +31,8 @@ public class FileStorageService {
         return fileDBRepository.findById(id).get();
     }
 
-    public Stream<FileDB> getAllFiles() {
-        return fileDBRepository.findAll().stream();
+    public List<FileDB> getAllFiles() {
+        return fileDBRepository.findAll();
     }
+
 }
