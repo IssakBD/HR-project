@@ -5,6 +5,8 @@ import kz.jusan.hrapp.repository.MainInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class InfoServiceImpl {
 
@@ -17,5 +19,9 @@ public class InfoServiceImpl {
 
     public void save(MainInfo mainInfo){
         mainInfoRepository.save(mainInfo);
+    }
+
+    public Optional<MainInfo> findById(Long user_id) {
+        return mainInfoRepository.findById(user_id);
     }
 }
