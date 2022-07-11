@@ -52,14 +52,24 @@ public class FormController {
         return answer;
     }
     @GetMapping("/download/maininfo/{user_id}")
-    public MainInfo downloadMainInfo(@PathVariable("user_id") Long user_id) {
-        MainInfo answer = new MainInfo();
+    public MainInfoDto downloadMainInfo(@PathVariable("user_id") Long user_id) {
+        MainInfoDto mainInfoDto = new MainInfoDto();
         try {
-            answer = infoService.findById(user_id).get();
+            MainInfo mainInfo = infoService.findById(user_id).get();
+            mainInfoDto.setIin(mainInfo.getIin());
+            mainInfoDto.setFIO(mainInfo.getFIO());
+            mainInfoDto.setDateOfBirthday(mainInfo.getDateOfBirthday());
+            mainInfoDto.setPlaceOfBirth(mainInfo.getPlaceOfBirth());
+            mainInfoDto.setNationality(mainInfo.getNationality());
+            mainInfoDto.setCitizenship(mainInfo.getCitizenship());
+            mainInfoDto.setIdentityCardNumber(mainInfo.getIdentityCardNumber());
+            mainInfoDto.setIdentityCardIssued(mainInfo.getIdentityCardIssued());
+            mainInfoDto.setPassportSeries(mainInfo.getPassportSeries());
+            mainInfoDto.setPassportIssued(mainInfo.getPassportIssued());
         } catch (Exception e) {
         }
 
-        return answer;
+        return mainInfoDto;
     }
 
 }
