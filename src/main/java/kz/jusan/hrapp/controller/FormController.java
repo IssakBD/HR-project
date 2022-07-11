@@ -52,13 +52,11 @@ public class FormController {
         return answer;
     }
     @GetMapping("/download/maininfo/{user_id}")
-    public Map<String, String> downloadMainInfo(@PathVariable("user_id") Long user_id) {
-        Map<String, String> answer = new HashMap<>();
+    public MainInfo downloadMainInfo(@PathVariable("user_id") Long user_id) {
+        MainInfo answer = new MainInfo();
         try {
-            infoService.findById(user_id);
-            answer.put("answer", "Main info is sent");
+            answer = infoService.findById(user_id).get();
         } catch (Exception e) {
-            answer.put("answer", "Main info didn't send");
         }
 
         return answer;
