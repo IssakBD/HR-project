@@ -1,5 +1,6 @@
 package kz.jusan.hrapp.rest;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import kz.jusan.hrapp.dto.AuthenticationRequestDto;
 import kz.jusan.hrapp.model.User;
 import kz.jusan.hrapp.repository.UserRepository;
@@ -46,7 +47,7 @@ public class AuthenticationRestControllerV1 {
     }
 
 
-    @PostMapping("login")
+    @PostMapping("sign-in")
     public Map<String, String> login(@RequestBody AuthenticationRequestDto requestDto) {
         try {
             String username = requestDto.getUsername();

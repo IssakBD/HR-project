@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtTokenProvider jwtTokenProvider;
 
     private static final String ADMIN_ENDPOINT = "/";
-    private static final String LOGIN_ENDPOINT = "/login";
+    private static final String LOGIN_ENDPOINT = "/sign-in";
 
     @Autowired
     public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(LOGIN_ENDPOINT,  "/swagger-ui/**", "/v3/api-docs/**", "/h2-console/**", "/upload", "/upload/photo/**", "/photos/**", "/photos", "/users/sign-up", "/form/upload/maininfo/*", "/login").permitAll()
+                .antMatchers(LOGIN_ENDPOINT,  "/swagger-ui/**", "/v3/api-docs/**", "/h2-console/**", "/upload", "/upload/photo/**", "/photos/**", "/photos", "/users/sign-up", "/form/upload/maininfo/*").permitAll()
                 .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
                 //.antMatchers()
                 .anyRequest().authenticated()
