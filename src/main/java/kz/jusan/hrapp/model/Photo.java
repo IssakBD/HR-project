@@ -31,8 +31,7 @@ public class Photo {
     private byte[] data;
 
     @OneToOne
-    @MapsId
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     public Photo(String name, String type, byte[] data, User user) {

@@ -12,9 +12,8 @@ import javax.persistence.*;
 public class MainInfo {
 
     @Id
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "iin")
     private String iin;
@@ -45,4 +44,8 @@ public class MainInfo {
 
     @Column(name = "identityCardIssued")
     private String identityCardIssued;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 }

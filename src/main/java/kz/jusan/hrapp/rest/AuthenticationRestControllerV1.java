@@ -26,6 +26,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/")
+@CrossOrigin("*")
 public class AuthenticationRestControllerV1 {
 
     private final AuthenticationManager authenticationManager;
@@ -44,7 +45,7 @@ public class AuthenticationRestControllerV1 {
         this.userRepository = userRepository;
     }
 
-    @CrossOrigin("*")
+
     @PostMapping("login")
     public Map<String, String> login(@RequestBody AuthenticationRequestDto requestDto) {
         try {
