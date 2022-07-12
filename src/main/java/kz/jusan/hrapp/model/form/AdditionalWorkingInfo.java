@@ -14,17 +14,11 @@ public class AdditionalWorkingInfo {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "businessType")
-    private String businessType;
-
-    @Column(name = "position")
-    private String position;
-
     @Column(name = "name")
     private String name;
 
-    @Column(name = "iin")
-    private String iin;
+    @Column(name = "inn")
+    private String inn;
 
     @Column(name = "address")
     private String address;

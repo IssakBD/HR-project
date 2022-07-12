@@ -201,9 +201,8 @@ public class InfoServiceImpl {
         List<AdditionalWorkingInfoDto> additionalWorkingInfoDtos = mainInfoDto.getAdditionalWorkingInfoDtos();
         for (AdditionalWorkingInfoDto info : additionalWorkingInfoDtos) {
             AdditionalWorkingInfo additionalWorkingInfo = new AdditionalWorkingInfo();
-            additionalWorkingInfo.setBusinessType(info.getBusinessType());
             additionalWorkingInfo.setName(info.getName());
-            additionalWorkingInfo.setIin(info.getIin());
+            additionalWorkingInfo.setInn(info.getInn());
             additionalWorkingInfo.setAddress(info.getAddress());
             additionalWorkingInfo.setTypeOfWork(info.getTypeOfWork());
             additionalWorkingInfo.setPhoneNumber(info.getPhoneNumber());
