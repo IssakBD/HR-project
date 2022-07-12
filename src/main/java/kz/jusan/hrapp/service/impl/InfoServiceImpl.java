@@ -228,7 +228,7 @@ public class InfoServiceImpl {
 //        }
 
     }
-    public Optional<MainInfo> findById(Long user_id) {
-        return mainInfoRepository.findById(user_id);
+    public Optional<MainInfo> findByUserId(Long user_id) {
+        return mainInfoRepository.findByUserId(user_id);
     }
 }
