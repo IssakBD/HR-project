@@ -49,10 +49,6 @@ public class FormController {
             mainInfoDto.setPlaceOfBirth(mainInfo.getPlaceOfBirth());
             mainInfoDto.setNationality(mainInfo.getNationality());
             mainInfoDto.setCitizenship(mainInfo.getCitizenship());
-//            mainInfoDto.setIdentityCardNumber(mainInfo.getIdentityCardNumber());
-//            mainInfoDto.setIdentityCardIssued(mainInfo.getIdentityCardIssued());
-//            mainInfoDto.setPassportSeries(mainInfo.getPassportSeries());
-//            mainInfoDto.setPassportIssued(mainInfo.getPassportIssued());
         } catch (Exception e) {
         }
 

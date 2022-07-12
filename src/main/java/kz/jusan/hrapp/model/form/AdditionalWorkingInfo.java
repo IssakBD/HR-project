@@ -14,6 +14,9 @@ public class AdditionalWorkingInfo {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "businessType")
+    private String businessType;
+
     @Column(name = "position")
     private String position;
 

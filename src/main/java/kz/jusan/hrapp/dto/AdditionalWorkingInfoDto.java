@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class AdditionalWorkingInfoDto {
+    private String businessType;
+
     private String position;
 
     private String name;

@@ -5,9 +5,12 @@ import kz.jusan.hrapp.model.User;
 import kz.jusan.hrapp.model.form.*;
 import kz.jusan.hrapp.repository.*;
 import kz.jusan.hrapp.service.UserService;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,10 +25,12 @@ public class InfoServiceImpl {
     private final RelativesInJusanRepository relativesInJusanRepository;
     private final UniversityInfoRepository universityInfoRepository;
 
+    private final FormToWordServiceImpl formToWordService;
+
     private final UserService userService;
 
     @Autowired
-    public InfoServiceImpl(MainInfoRepository mainInfoRepository, AdditionalEducationInfoRepository additionalEducationInfoRepository, AdditionalWorkingInfoRepository additionalWorkingInfoRepository, ChildrenInfoRepository childrenInfoRepository, RelativesInfoRepository relativesInfoRepository, RelativesInJusanRepository relativesInJusanRepository, UniversityInfoRepository universityInfoRepository, UserRepository userRepository, UserService userService) {
+    public InfoServiceImpl(MainInfoRepository mainInfoRepository, AdditionalEducationInfoRepository additionalEducationInfoRepository, AdditionalWorkingInfoRepository additionalWorkingInfoRepository, ChildrenInfoRepository childrenInfoRepository, RelativesInfoRepository relativesInfoRepository, RelativesInJusanRepository relativesInJusanRepository, UniversityInfoRepository universityInfoRepository, UserRepository userRepository, FormToWordServiceImpl formToWordService, UserService userService) {
         this.mainInfoRepository = mainInfoRepository;
         this.additionalEducationInfoRepository = additionalEducationInfoRepository;
         this.additionalWorkingInfoRepository = additionalWorkingInfoRepository;
@@ -33,6 +38,7 @@ public class InfoServiceImpl {
         this.relativesInfoRepository = relativesInfoRepository;
         this.relativesInJusanRepository = relativesInJusanRepository;
         this.universityInfoRepository = universityInfoRepository;
+        this.formToWordService = formToWordService;
         this.userService = userService;
     }
 
@@ -195,6 +201,7 @@ public class InfoServiceImpl {
         List<AdditionalWorkingInfoDto> additionalWorkingInfoDtos = mainInfoDto.getAdditionalWorkingInfoDtos();
         for (AdditionalWorkingInfoDto info : additionalWorkingInfoDtos) {
             AdditionalWorkingInfo additionalWorkingInfo = new AdditionalWorkingInfo();
+            additionalWorkingInfo.setBusinessType(info.getBusinessType());
             additionalWorkingInfo.setName(info.getName());
             additionalWorkingInfo.setIin(info.getIin());
             additionalWorkingInfo.setAddress(info.getAddress());
@@ -214,6 +221,13 @@ public class InfoServiceImpl {
             relativesInJusan.setUser(user);
             relativesInJusanRepository.save(relativesInJusan);
         }
+
+        try {
+            formToWordService.updateDocument(new ArrayList<>());
+        } catch (InvalidFormatException | IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
     public Optional<MainInfo> findById(Long user_id) {
         return mainInfoRepository.findById(user_id);

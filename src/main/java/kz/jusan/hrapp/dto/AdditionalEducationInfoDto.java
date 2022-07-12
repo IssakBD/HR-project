@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class AdditionalEducationInfoDto {
+
     private String yearOfGraduation;
 
     private String durationOfTraining;
