@@ -26,24 +26,11 @@ public class FormController {
         this.userService = userService;
     }
 
-    @PostMapping("/upload/maininfo/{user_id}")
+    @PostMapping("/upload/info/{user_id}")
     public Map<String, String> uploadMainInfo(@PathVariable("user_id") Long user_id, @RequestBody MainInfoDto mainInfoDto) {
         Map<String, String> answer = new HashMap<>();
         try {
-            MainInfo mainInfo = new MainInfo();
-            mainInfo.setId(user_id);
-            mainInfo.setIin(mainInfoDto.getIin());
-            mainInfo.setFIO(mainInfoDto.getFIO());
-            mainInfo.setDateOfBirthday(mainInfoDto.getDateOfBirthday());
-            mainInfo.setPlaceOfBirth(mainInfoDto.getPlaceOfBirth());
-            mainInfo.setNationality(mainInfoDto.getNationality());
-            mainInfo.setCitizenship(mainInfoDto.getCitizenship());
-            mainInfo.setIdentityCardNumber(mainInfoDto.getIdentityCardNumber());
-            mainInfo.setIdentityCardIssued(mainInfoDto.getIdentityCardIssued());
-            mainInfo.setPassportSeries(mainInfoDto.getPassportSeries());
-            mainInfo.setPassportIssued(mainInfoDto.getPassportIssued());
-            mainInfo.setUser(userService.findById(user_id));
-            infoService.save(mainInfo);
+            infoService.save(mainInfoDto, user_id);
             answer.put("answer", "Main info is uploaded");
         } catch (Exception e) {
             answer.put("answer", "Main info is not uploaded");
@@ -51,7 +38,7 @@ public class FormController {
 
         return answer;
     }
-    @GetMapping("/download/maininfo/{user_id}")
+    @GetMapping("/download/info/{user_id}")
     public MainInfoDto downloadMainInfo(@PathVariable("user_id") Long user_id) {
         MainInfoDto mainInfoDto = new MainInfoDto();
         try {
@@ -62,10 +49,10 @@ public class FormController {
             mainInfoDto.setPlaceOfBirth(mainInfo.getPlaceOfBirth());
             mainInfoDto.setNationality(mainInfo.getNationality());
             mainInfoDto.setCitizenship(mainInfo.getCitizenship());
-            mainInfoDto.setIdentityCardNumber(mainInfo.getIdentityCardNumber());
-            mainInfoDto.setIdentityCardIssued(mainInfo.getIdentityCardIssued());
-            mainInfoDto.setPassportSeries(mainInfo.getPassportSeries());
-            mainInfoDto.setPassportIssued(mainInfo.getPassportIssued());
+//            mainInfoDto.setIdentityCardNumber(mainInfo.getIdentityCardNumber());
+//            mainInfoDto.setIdentityCardIssued(mainInfo.getIdentityCardIssued());
+//            mainInfoDto.setPassportSeries(mainInfo.getPassportSeries());
+//            mainInfoDto.setPassportIssued(mainInfo.getPassportIssued());
         } catch (Exception e) {
         }
 

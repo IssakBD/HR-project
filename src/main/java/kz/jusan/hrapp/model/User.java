@@ -1,6 +1,6 @@
 package kz.jusan.hrapp.model;
 
-import kz.jusan.hrapp.model.form.MainInfo;
+import kz.jusan.hrapp.model.form.*;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -35,9 +35,6 @@ public class User extends BaseEntity {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private List<Role> roles;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -46,5 +43,24 @@ public class User extends BaseEntity {
 
     @OneToOne(mappedBy = "user")
     private MainInfo mainInfo;
+
+    @OneToMany(mappedBy = "user")
+    private List<UniversityInfo> universityInfos;
+
+    @OneToMany(mappedBy = "user")
+    private List<AdditionalEducationInfo> additionalEducationInfos;
+
+    @OneToMany(mappedBy = "user")
+    private List<ChildrenInfo> childrenInfos;
+
+    @OneToMany(mappedBy = "user")
+    private List<RelativesInfo> RelativesInfos;
+
+    @OneToMany(mappedBy = "user")
+    private List<AdditionalWorkingInfo> additionalWorkingInfos;
+
+    @OneToMany(mappedBy = "user")
+    private List<RelativesInJusan> RelativesInJusan;
+
 
 }

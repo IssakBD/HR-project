@@ -7,7 +7,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "maininfo")
+@Table(name = "mainInfo")
 @Data
 public class MainInfo {
 
@@ -21,6 +21,9 @@ public class MainInfo {
     @Column(name = "fio")
     private String FIO;
 
+    @Column(name = "oldSurname")
+    private String oldSurname;
+
     @Column(name = "dateOfBirthday")
     private String dateOfBirthday;
 
@@ -33,19 +36,289 @@ public class MainInfo {
     @Column(name = "citizenship")
     private String citizenship;
 
-    @Column(name = "passportSeries")
-    private String passportSeries;
+    @Column(name = "documentSeries")
+    private String documentSeries;
 
-    @Column(name = "passportIssued")
-    private String passportIssued;
+    @Column(name = "documentNumber")
+    private String documentNumber;
 
-    @Column(name = "identityCardNumber")
-    private String identityCardNumber;
+    @Column(name = "documentIssued")
+    private String documentIssued;
 
-    @Column(name = "identityCardIssued")
-    private String identityCardIssued;
+    @Column(name = "homePhoneNumber")
+    private String homePhoneNumber;
 
-    @OneToOne
+    @Column(name = "workPhoneNumber")
+    private String workPhoneNumber;
+
+    @Column(name = "mobilePhoneNumber")
+    private String mobilePhoneNumber;
+
+    @Column(name = "contactPersonFio")
+    private String contactPersonFio;
+
+    @Column(name = "contactPersonDegreeOfRelationship")
+    private String contactPersonDegreeOfRelationship;
+
+    @Column(name = "contactPersonPhoneNumber")
+    private String contactPersonPhoneNumber;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "permanentRegistrationAddressCity")
+    private String permanentRegistrationAddressCity;
+
+    @Column(name = "permanentRegistrationAddressDistrict")
+    private String permanentRegistrationAddressDistrict;
+
+    @Column(name = "permanentRegistrationAddressRegion")
+    private String permanentRegistrationAddressRegion;
+
+    @Column(name = "permanentRegistrationAddressStreet")
+    private String permanentRegistrationAddressStreet;
+
+    @Column(name = "permanentRegistrationAddressHouseNumber")
+    private String permanentRegistrationAddressHouseNumber;
+
+    @Column(name = "permanentRegistrationAddressCorpus")
+    private String permanentRegistrationAddressCorpus;
+
+    @Column(name = "permanentRegistrationAddressApartment")
+    private String permanentRegistrationAddressApartment;
+
+    @Column(name = "actualAddressCity")
+    private String actualAddressCity;
+
+    @Column(name = "actualAddressDistrict")
+    private String actualAddressDistrict;
+
+    @Column(name = "actualAddressRegion")
+    private String actualAddressRegion;
+
+    @Column(name = "actualAddressStreet")
+    private String actualAddressStreet;
+
+    @Column(name = "actualAddressHouseNumber")
+    private String actualAddressHouseNumber;
+
+    @Column(name = "actualAddressCorpus")
+    private String actualAddressCorpus;
+
+    @Column(name = "actualAddressApartment")
+    private String actualAddressApartment;
+
+    @Column(name = "startOfWorkingOne")
+    private String startOfWorkingOne;
+
+    @Column(name = "endOfWorkingOne")
+    private String endOfWorkingOne;
+
+    @Column(name = "workingPlaceNameOne")
+    private String workingPlaceInfoOne;
+
+    @Column(name = "workTypeOne")
+    private String workTypeOne;
+
+    @Column(name = "workingPlaceAddressOne")
+    private String workingPlaceAddressOne;
+
+    @Column(name = "workingPlacePhoneNumberOne")
+    private String workingPlacePhoneNumberOne;
+
+    @Column(name = "positionOne")
+    private String positionOne;
+
+    @Column(name = "managerFullNameOne")
+    private String managerFullNameOne;
+
+    @Column(name = "managerPhoneNumberOne")
+    private String managerPhoneNumberOne;
+
+    @Column(name = "reasonForDismissalOne")
+    private String reasonForDismissalOne;
+
+    @Column(name = "startOfWorkingTwo")
+    private String startOfWorkingTwo;
+
+    @Column(name = "endOfWorkingTwo")
+    private String endOfWorkingTwo;
+
+    @Column(name = "workingPlaceNameTwo")
+    private String workingPlaceInfoTwo;
+
+    @Column(name = "workTypeTwo")
+    private String workTypeTwo;
+
+    @Column(name = "workingPlaceAddressTwo")
+    private String workingPlaceAddressTwo;
+
+    @Column(name = "workingPlacePhoneNumberTwo")
+    private String workingPlacePhoneNumberTwo;
+
+    @Column(name = "positionTwo")
+    private String positionTwo;
+
+    @Column(name = "managerFullNameTwo")
+    private String managerFullNameTwo;
+
+    @Column(name = "managerPhoneNumberTwo")
+    private String managerPhoneNumberTwo;
+
+    @Column(name = "reasonForDismissalTwo")
+    private String reasonForDismissalTwo;
+
+    @Column(name = "startOfWorkingThree")
+    private String startOfWorkingThree;
+
+    @Column(name = "endOfWorkingThree")
+    private String endOfWorkingThree;
+
+    @Column(name = "workingPlaceNameThree")
+    private String workingPlaceNameThree;
+
+    @Column(name = "workTypeThree")
+    private String workTypeThree;
+
+    @Column(name = "workingPlaceAddressThree")
+    private String workingPlaceAddressThree;
+
+    @Column(name = "workingPlacePhoneNumberThree")
+    private String workingPlacePhoneNumberThree;
+
+    @Column(name = "positionThree")
+    private String positionThree;
+
+    @Column(name = "managerFullNameThree")
+    private String managerFullNameThree;
+
+    @Column(name = "managerPhoneNumberThree")
+    private String managerPhoneNumberThree;
+
+    @Column(name = "reasonForDismissalThree")
+    private String reasonForDismissalThree;
+
+    @Column(name = "PersonsInfoWhoCanGiveProfessionalRecommendationFIOOne")
+    private String PersonsInfoWhoCanGiveProfessionalRecommendationFIOOne;
+
+    @Column(name = "PersonsInfoWhoCanGiveProfessionalRecommendationWorkingInfoOne")
+    private String PersonsInfoWhoCanGiveProfessionalRecommendationWorkingInfoOne;
+
+    @Column(name = "PersonsInfoWhoCanGiveProfessionalRecommendationWorkingPositionOne")
+    private String PersonsInfoWhoCanGiveProfessionalRecommendationWorkingPositionOne;
+
+    @Column(name = "PersonsInfoWhoCanGiveProfessionalRecommendationPhoneNumberOne")
+    private String PersonsInfoWhoCanGiveProfessionalRecommendationPhoneNumberOne;
+
+    @Column(name = "PersonsInfoWhoCanGiveProfessionalRecommendationFIOTwo")
+    private String PersonsInfoWhoCanGiveProfessionalRecommendationFIOTwo;
+
+    @Column(name = "PersonsInfoWhoCanGiveProfessionalRecommendationWorkingInfoTwo")
+    private String PersonsInfoWhoCanGiveProfessionalRecommendationWorkingInfoTwo;
+
+    @Column(name = "PersonsInfoWhoCanGiveProfessionalRecommendationWorkingPositionTwo")
+    private String PersonsInfoWhoCanGiveProfessionalRecommendationWorkingPositionTwo;
+
+    @Column(name = "PersonsInfoWhoCanGiveProfessionalRecommendationPhoneNumberTwo")
+    private String PersonsInfoWhoCanGiveProfessionalRecommendationPhoneNumberTwo;
+
+    @Column(name = "PersonsInfoWhoCanGiveProfessionalRecommendationFIOThree")
+    private String PersonsInfoWhoCanGiveProfessionalRecommendationFIOThree;
+
+    @Column(name = "PersonsInfoWhoCanGiveProfessionalRecommendationWorkingInfoThree")
+    private String PersonsInfoWhoCanGiveProfessionalRecommendationWorkingInfoThree;
+
+    @Column(name = "PersonsInfoWhoCanGiveProfessionalRecommendationWorkingPositionThree")
+    private String PersonsInfoWhoCanGiveProfessionalRecommendationWorkingPositionThree;
+
+    @Column(name = "PersonsInfoWhoCanGiveProfessionalRecommendationPhoneNumberThree")
+    private String PersonsInfoWhoCanGiveProfessionalRecommendationPhoneNumberThree;
+
+    @Column(name = "maritalStatus")
+    private String maritalStatus;
+
+    @Column(name = "spouseFIO")
+    private String spouseFIO;
+
+    @Column(name = "spouseDateOfBirthday")
+    private String spouseDateOfBirthday;
+
+    @Column(name = "spouseWorkingInfo")
+    private String spouseWorkingInfo;
+
+    @Column(name = "spouseWorkingPosition")
+    private String spouseWorkingPosition;
+
+    @Column(name = "spouseAddress")
+    private String spouseAddress;
+
+    @Column(name = "spouseCitizenship")
+    private String spouseCitizenship;
+
+    @Column(name = "spouseContacts")
+    private String spouseContacts;
+
+    @Column(name = "carModel")
+    private String carModel;
+
+    @Column(name = "carYearOfManufacture")
+    private String carYearOfManufacture;
+
+    @Column(name = "carNumber")
+    private String carNumber;
+
+    @Column(name = "militaryStatus")
+    private String militaryStatus;
+
+    @Column(name = "benefitsStatus")
+    private String benefitsStatus;
+
+    @Column(name = "overdueLoanStatus")
+    private String overdueLoanStatus;
+
+    @Column(name = "overdueLoanReason")
+    private String overdueLoanReason;
+
+    @Column(name = "criminalLiabilityStatus")
+    private String criminalLiabilityStatus;
+
+    @Column(name = "criminalLiabilityReason")
+    private String criminalLiabilityReason;
+
+    @Column(name = "relativesCriminalCaseStatus")
+    private String relativesCriminalCaseStatus;
+
+    @Column(name = "relativesCriminalCaseReason")
+    private String relativesCriminalCaseReason;
+
+    @Column(name = "criminalCaseStatus")
+    private String criminalCaseStatus;
+
+    @Column(name = "criminalCaseReason")
+    private String criminalCaseReason;
+
+    @Column(name = "alimonyStatus")
+    private String alimonyStatus;
+
+    @Column(name = "alimonyReason")
+    private String alimonyReason;
+
+    @Column(name = "administrativeLiabilityStatus")
+    private String administrativeLiabilityStatus;
+
+    @Column(name = "administrativeLiabilityReason")
+    private String administrativeLiabilityReason;
+
+    @Column(name = "additionalInformation")
+    private String additionalInformation;
+
+    @Column(name = "additionalIncome")
+    private String additionalIncome;
+
+    @Column(name = "dateOfFillingIn")
+    private String dateOfFillingIn;
+
+    @OneToOne()
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 }
