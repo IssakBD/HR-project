@@ -222,11 +222,11 @@ public class InfoServiceImpl {
             relativesInJusanRepository.save(relativesInJusan);
         }
 
-        try {
-            formToWordService.updateDocument(new ArrayList<>());
-        } catch (InvalidFormatException | IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            formToWordService.updateDocument(new ArrayList<>());
+//        } catch (InvalidFormatException | IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
     }
     public Optional<MainInfo> findById(Long user_id) {
