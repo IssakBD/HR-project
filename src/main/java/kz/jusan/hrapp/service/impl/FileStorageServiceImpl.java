@@ -2,7 +2,9 @@ package kz.jusan.hrapp.service.impl;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
+import kz.jusan.hrapp.dto.DocumentTypeDto;
 import kz.jusan.hrapp.model.FileDB;
 import kz.jusan.hrapp.repository.FileDBRepository;
 import kz.jusan.hrapp.repository.UserRepository;
@@ -28,7 +30,10 @@ public class FileStorageServiceImpl {
     @Transactional
     public FileDB store(MultipartFile file, Long userId) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        FileDB fileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
+        FileDB fileDB = fileDBRepository.findByData(file.getBytes()).orElse(new FileDB());
+        fileDB.setName(fileName);
+        fileDB.setType(file.getContentType());
+        fileDB.setData(file.getBytes());
         fileDB.setUser(userRepository.findById(userId).get());
 
         return fileDBRepository.save(fileDB);
@@ -44,6 +49,11 @@ public class FileStorageServiceImpl {
 
     public List<FileDB> getAllFiles() {
         return fileDBRepository.findAll();
+    }
+
+    public void uploadDocumentType(DocumentTypeDto documentTypeDto){
+        FileDB fileDB = fileDBRepository.findById(documentTypeDto.getDocumentId()).orElse(null);
+        fileDB.setDocumentType(documentTypeDto.getDocumentType());
     }
 
 }

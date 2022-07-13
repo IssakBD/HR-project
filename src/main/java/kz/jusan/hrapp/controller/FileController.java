@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import kz.jusan.hrapp.dto.DocumentTypeDto;
 import kz.jusan.hrapp.message.ResponseMessage;
 import kz.jusan.hrapp.model.FileDB;
 import kz.jusan.hrapp.model.User;
@@ -57,27 +58,17 @@ public class FileController {
         return answer;
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<FileDB>> getListFiles() {
-//        List<FileDB> files = storageService.getAllFiles();
-//        log.debug(files.toString() + " - files");
-//        files.stream()
-//                .map(dbFile -> {
-//                    String fileDownloadUri = ServletUriComponentsBuilder
-//                            .fromCurrentContextPath()
-//                            .path("/files/")
-//                            .path(dbFile.getId())
-//                            .toUriString();
-//
-//                    return new ResponseFile(
-//                            dbFile.getName(),
-//                            fileDownloadUri,
-//                            dbFile.getType(),
-//                            dbFile.getData().length);
-//                }).collect(Collectors.toList());
-//
-//        return ResponseEntity.status(HttpStatus.OK).body(files);
-//    }
+    @PostMapping("/upload/document-type")
+    public HashMap<String, String> uploadDocumentType(@RequestBody DocumentTypeDto documentTypeDto){
+        HashMap<String, String> answer = new HashMap<>();
+        try {
+            storageService.uploadDocumentType(documentTypeDto);
+            answer.put("answer", "ok");
+        } catch (Exception e) {
+            answer.put("answer", "document Type is not upload");
+        }
+        return answer;
+    }
 
 
     @GetMapping("/get/{id}")
