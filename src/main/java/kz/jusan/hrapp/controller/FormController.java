@@ -32,6 +32,7 @@ public class FormController {
         try {
             infoService.save(mainInfoDto, user_id);
             answer.put("answer", "Main info is uploaded");
+            answer.put("sizeOfUniversityList", String.valueOf(mainInfoDto.getUniversityInfoDtos().size()));
         } catch (Exception e) {
             answer.put("answer", "Main info is not uploaded " + e.getMessage());
         }
