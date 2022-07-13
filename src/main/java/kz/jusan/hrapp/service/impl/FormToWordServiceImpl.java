@@ -41,7 +41,7 @@ public class FormToWordServiceImpl {
     public void updateDocument(List<String> answers) throws InvalidFormatException, IOException {
 
 
-        XWPFDocument doc = new XWPFDocument(OPCPackage.open("templates/forms.docx")); //CHANGE PATH FOR THE ACTUAL ONE
+        XWPFDocument doc = new XWPFDocument(OPCPackage.open("src/main/resources/templates/forms.docx")); //CHANGE PATH FOR THE ACTUAL ONE
 
         for (String key : KEYS) {
             for (XWPFTable tbl : doc.getTables()) {
