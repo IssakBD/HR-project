@@ -5,8 +5,10 @@ import java.util.List;
 
 import kz.jusan.hrapp.model.FileDB;
 import kz.jusan.hrapp.repository.FileDBRepository;
+import kz.jusan.hrapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,15 +18,20 @@ public class FileStorageServiceImpl {
     @Autowired
     private FileDBRepository fileDBRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public FileStorageServiceImpl(FileDBRepository fileDBRepository) {
         this.fileDBRepository = fileDBRepository;
     }
 
-    public FileDB store(MultipartFile file) throws IOException {
+    @Transactional
+    public FileDB store(MultipartFile file, Long userId) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
+        FileDB fileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
+        fileDB.setUser(userRepository.findById(userId).get());
 
-        return fileDBRepository.save(FileDB);
+        return fileDBRepository.save(fileDB);
     }
 
     public FileDB getFile(String id) {

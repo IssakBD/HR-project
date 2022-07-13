@@ -2,9 +2,13 @@ package kz.jusan.hrapp.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import kz.jusan.hrapp.model.FileDB;
+import kz.jusan.hrapp.model.Photo;
 import kz.jusan.hrapp.model.User;
 import lombok.Data;
+import org.springframework.security.core.parameters.P;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +27,9 @@ public class UserDto {
     private String lastName;
     private String email;
 
-    private List<FileDB> fileDBS;
+    private List<FileDBDto> fileDBDtos;
+
+    private PhotoDto photoDto;
 
     public User toUser(){
         User user = new User();
@@ -36,15 +42,4 @@ public class UserDto {
         return user;
     }
 
-    public static UserDto fromUser(User user) {
-        UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setUsername(user.getUsername());
-        userDto.setFirstName(user.getFirstName());
-        userDto.setLastName(user.getLastName());
-        userDto.setEmail(user.getEmail());
-        userDto.setFileDBS(user.getFileDBS());
-
-        return userDto;
-    }
 }

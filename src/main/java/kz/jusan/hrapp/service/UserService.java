@@ -1,5 +1,6 @@
 package kz.jusan.hrapp.service;
 
+import kz.jusan.hrapp.dto.UserDto;
 import kz.jusan.hrapp.model.User;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface UserService {
     User findById(Long id);
 
     void delete(Long id);
+
+    UserDto fromUser(User user);
 }

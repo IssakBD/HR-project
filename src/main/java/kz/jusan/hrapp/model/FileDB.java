@@ -2,12 +2,14 @@ package kz.jusan.hrapp.model;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "files")
 @Data
+@AllArgsConstructor
 public class FileDB {
     @Id
     @GeneratedValue(generator = "uuid")
@@ -21,7 +23,7 @@ public class FileDB {
     @Lob
     private byte[] data;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private User user;
 

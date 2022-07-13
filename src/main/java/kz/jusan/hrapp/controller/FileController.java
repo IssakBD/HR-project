@@ -27,11 +27,11 @@ public class FileController {
     @Autowired
     private FileStorageServiceImpl storageService;
 
-    @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
+    @PostMapping("/upload/{id}")
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable("id") Long userId) {
         String message = "";
         try {
-            storageService.store(file);
+            storageService.store(file, userId);
 
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
