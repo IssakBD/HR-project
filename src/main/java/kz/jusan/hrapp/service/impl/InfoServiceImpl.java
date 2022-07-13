@@ -8,6 +8,7 @@ import kz.jusan.hrapp.service.UserService;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class InfoServiceImpl {
         this.userService = userService;
     }
 
+    @Transactional
     public void save(MainInfoDto mainInfoDto, Long userId){
         User user = userService.findById(userId);
         MainInfo mainInfo = mainInfoRepository.findByUserId(userId).orElse(new MainInfo());

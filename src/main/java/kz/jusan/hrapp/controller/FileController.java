@@ -1,12 +1,18 @@
 package kz.jusan.hrapp.controller;
 
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import kz.jusan.hrapp.message.ResponseMessage;
 import kz.jusan.hrapp.model.FileDB;
+import kz.jusan.hrapp.model.User;
+import kz.jusan.hrapp.model.form.MainInfo;
+import kz.jusan.hrapp.service.UserService;
 import kz.jusan.hrapp.service.impl.FileStorageServiceImpl;
+import kz.jusan.hrapp.service.impl.FormToWordServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -21,8 +27,19 @@ import org.springframework.web.multipart.MultipartFile;
 @CrossOrigin("*")
 public class FileController {
 
+
+    private final FileStorageServiceImpl storageService;
+
+    private final FormToWordServiceImpl formToWordService;
+
+    private final UserService userService;
+
     @Autowired
-    private FileStorageServiceImpl storageService;
+    public FileController(FileStorageServiceImpl storageService, FormToWordServiceImpl formToWordService, UserService userService) {
+        this.storageService = storageService;
+        this.formToWordService = formToWordService;
+        this.userService = userService;
+    }
 
     @PostMapping("/upload/{userId}")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable("userId") Long userId, @RequestParam("documentType") String documentType) {
@@ -76,5 +93,26 @@ public class FileController {
         HashMap<String, List<FileDB>> answer = new HashMap<>();
         answer.put("List of documents for current user: ", fileDBs);
         return answer;
+    }
+
+    @PostMapping("/generate/{userId}")
+    public HashMap<String, String> generate(@PathVariable("userId") Long userId) {
+        HashMap<String, String> result = new HashMap<>();
+        List<String> answers = new ArrayList<>();
+        User user = userService.findById(userId);
+        MainInfo mainInfo = user.getMainInfo();
+
+        answers.add(mainInfo.getIin());
+        answers.add(mainInfo.getFIO());
+        answers.add(mainInfo.getOldSurname());
+        answers.add(mainInfo.getDateOfBirthday());
+        answers.add(mainInfo.getNationality());
+        answers.add(mainInfo.getCitizenship());
+        answers.add(mainInfo.getDocumentSeries());
+        answers.add(mainInfo.getDocumentNumber());
+        answers.add(mainInfo.getDocumentIssued());
+
+
+        return result;
     }
 }

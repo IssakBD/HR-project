@@ -7,6 +7,7 @@ import kz.jusan.hrapp.model.User;
 import kz.jusan.hrapp.repository.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +21,7 @@ public class PhotoStorageServiceImpl {
         this.photoRepository = photoRepository;
     }
 
+    @Transactional
     public Photo store(MultipartFile file, User user) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Photo photo = photoRepository.findPhotoByUserId(user.getId()).orElse(new Photo());

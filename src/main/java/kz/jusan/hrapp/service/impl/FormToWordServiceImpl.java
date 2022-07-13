@@ -1,5 +1,6 @@
 package kz.jusan.hrapp.service.impl;
 
+import kz.jusan.hrapp.model.User;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.util.Units;
@@ -20,30 +21,12 @@ public class FormToWordServiceImpl {
 
     private static List<String> KEYS = new ArrayList<>();
 
-    private List<String> answers;
+    public void updateDocument(String key, String value) throws InvalidFormatException, IOException {
 
-
-
-    @PostConstruct
-    public void keysInit(){
-        KEYS.add("FIO");
-        KEYS.add("EXNAME");
-        KEYS.add("BIRTHDAY");
-        KEYS.add("ETHNICITY");
-        KEYS.add("CITIZENSHIP");
-        KEYS.add("SERIAL");
-        KEYS.add("IDNUM");
-        KEYS.add("ISSUED");
-    }
-
-
-
-    public void updateDocument(List<String> answers) throws InvalidFormatException, IOException {
 
 
         XWPFDocument doc = new XWPFDocument(OPCPackage.open("src/main/resources/templates/forms.docx")); //CHANGE PATH FOR THE ACTUAL ONE
-
-        for (String key : KEYS) {
+        for (int i = 0; i < KEYS.size(); i++) {
             for (XWPFTable tbl : doc.getTables()) {
                 for (XWPFTableRow row : tbl.getRows()) {
                     for (XWPFTableCell cell : row.getTableCells()) {
@@ -51,7 +34,7 @@ public class FormToWordServiceImpl {
                             for (XWPFRun r : p.getRuns()) {
                                 String text = r.getText(0);
                                 if (text != null && text.contains(key)) {
-                                    text = text.replace(key, "answers.get(i)");
+                                    text = text.replace(key, value);
                                     r.setText(text, 0);
                                 }
                             }
@@ -59,13 +42,14 @@ public class FormToWordServiceImpl {
                     }
                 }
             }
-            for (XWPFParagraph p : doc.getParagraphs()) {
+
+        for (XWPFParagraph p : doc.getParagraphs()) {
                 List<XWPFRun> runs = p.getRuns();
                 if (runs != null) {
                     for (XWPFRun r : runs) {
                         String text = r.getText(0);
-                        if (text != null && text.contains(key)) {
-                            text = text.replace(key, "answers.get(i)");
+                        if (text != null && text.contains(KEYS.get(i))) {
+                            text = text.replace(KEYS.get(i), "answers.get(i)");
                             r.setText(text, 0);
                         }
                     }
@@ -78,6 +62,7 @@ public class FormToWordServiceImpl {
                         String text = r.getText(0);
                         if (text != null && text.contains("PIC")) {
                             String imgFile = "/home/administrator/Downloads/pic.jpg";
+//                            String imgFile = String.valueOf(user.getPhoto().getData());
                             r.addPicture(new FileInputStream(imgFile), XWPFDocument.PICTURE_TYPE_JPEG, imgFile, Units.toEMU(100), Units.toEMU(100));
                             text = text.replace("PIC", "");
                             r.setText(text, 0);
@@ -85,8 +70,8 @@ public class FormToWordServiceImpl {
                     }
                 }
             }
-        }
 
             doc.write(new FileOutputStream("/home/administrator/Downloads/output.docx"));
     }
+}
 }

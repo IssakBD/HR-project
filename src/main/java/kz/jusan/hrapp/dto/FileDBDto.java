@@ -8,8 +8,6 @@ import javax.persistence.Lob;
 public class FileDBDto {
     private String id;
 
-    private String documentType;
-
     private String name;
 
     private String type;

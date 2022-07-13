@@ -30,7 +30,6 @@ public class FileStorageServiceImpl {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         FileDB fileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
         fileDB.setUser(userRepository.findById(userId).get());
-        fileDB.setDocumentType(documentType);
 
         return fileDBRepository.save(fileDB);
     }
