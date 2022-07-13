@@ -19,22 +19,24 @@ import java.util.List;
 @Service
 public class FormToWordServiceImpl {
 
-    private static List<String> KEYS = new ArrayList<>();
-
-    public void updateDocument(String key, String value) throws InvalidFormatException, IOException {
+    public void updateDocument(String key, String value, XWPFDocument doc) throws InvalidFormatException, IOException {
 
 
 
-        XWPFDocument doc = new XWPFDocument(OPCPackage.open("src/main/resources/templates/forms.docx")); //CHANGE PATH FOR THE ACTUAL ONE
-        for (int i = 0; i < KEYS.size(); i++) {
+//        XWPFDocument doc = new XWPFDocument(OPCPackage.open("src/main/resources/templates/forms.docx")); //CHANGE PATH FOR THE ACTUAL ONE
+
             for (XWPFTable tbl : doc.getTables()) {
                 for (XWPFTableRow row : tbl.getRows()) {
                     for (XWPFTableCell cell : row.getTableCells()) {
                         for (XWPFParagraph p : cell.getParagraphs()) {
                             for (XWPFRun r : p.getRuns()) {
                                 String text = r.getText(0);
+
                                 if (text != null && text.contains(key)) {
-                                    text = text.replace(key, value);
+                                    if(value.equals(null)){
+                                        value = " ";
+                                    }
+                                    text = text.replace(key, value + "");
                                     r.setText(text, 0);
                                 }
                             }
@@ -48,8 +50,11 @@ public class FormToWordServiceImpl {
                 if (runs != null) {
                     for (XWPFRun r : runs) {
                         String text = r.getText(0);
-                        if (text != null && text.contains(KEYS.get(i))) {
-                            text = text.replace(KEYS.get(i), "answers.get(i)");
+                        if (text != null && text.contains(key)) {
+                            if(value.equals(null)){
+                                value = " ";
+                            }
+                            text = text.replace(key, value + "");
                             r.setText(text, 0);
                         }
                     }
@@ -71,7 +76,7 @@ public class FormToWordServiceImpl {
                 }
             }
 
-            doc.write(new FileOutputStream("/home/administrator/Downloads/output.docx"));
+//            doc.write(new FileOutputStream("/home/administrator/Downloads/output.docx"));
     }
 }
-}
+

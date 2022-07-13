@@ -54,6 +54,7 @@ public class FileStorageServiceImpl {
     public void uploadDocumentType(DocumentTypeDto documentTypeDto){
         FileDB fileDB = fileDBRepository.findById(documentTypeDto.getDocumentId()).orElse(null);
         fileDB.setDocumentType(documentTypeDto.getDocumentType());
+        fileDBRepository.save(fileDB);
     }
 
 }

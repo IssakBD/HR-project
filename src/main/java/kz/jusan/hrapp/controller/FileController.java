@@ -1,10 +1,12 @@
 package kz.jusan.hrapp.controller;
 
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kz.jusan.hrapp.dto.DocumentTypeDto;
 import kz.jusan.hrapp.message.ResponseMessage;
@@ -15,6 +17,9 @@ import kz.jusan.hrapp.service.UserService;
 import kz.jusan.hrapp.service.impl.FileStorageServiceImpl;
 import kz.jusan.hrapp.service.impl.FormToWordServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -91,20 +96,48 @@ public class FileController {
     @PostMapping("/generate/{userId}")
     public HashMap<String, String> generate(@PathVariable("userId") Long userId) {
         HashMap<String, String> result = new HashMap<>();
+
+        HashMap<String, String> replaceMaps = new HashMap<>();
         List<String> answers = new ArrayList<>();
         User user = userService.findById(userId);
         MainInfo mainInfo = user.getMainInfo();
 
-        answers.add(mainInfo.getIin());
-        answers.add(mainInfo.getFIO());
-        answers.add(mainInfo.getOldSurname());
-        answers.add(mainInfo.getDateOfBirthday());
-        answers.add(mainInfo.getNationality());
-        answers.add(mainInfo.getCitizenship());
-        answers.add(mainInfo.getDocumentSeries());
-        answers.add(mainInfo.getDocumentNumber());
-        answers.add(mainInfo.getDocumentIssued());
+        replaceMaps.put("IIN", mainInfo.getIin());
+        replaceMaps.put("FIO", mainInfo.getFIO());
+        replaceMaps.put("EXNAME", mainInfo.getOldSurname());
+        replaceMaps.put("BIRTHDAY", mainInfo.getDateOfBirthday());
+        replaceMaps.put("ETHNICITY", mainInfo.getNationality());
+        replaceMaps.put("CITIZENSHIP", mainInfo.getCitizenship());
+        replaceMaps.put("SERIAL", mainInfo.getDocumentSeries());
+        replaceMaps.put("IDNUM", mainInfo.getDocumentNumber());
+        replaceMaps.put("ISSUED", mainInfo.getDocumentIssued());
 
+        System.out.println(mainInfo.getOldSurname());
+
+        XWPFDocument doc = null; //CHANGE PATH FOR THE ACTUAL ONE
+        try {
+            doc = new XWPFDocument(OPCPackage.open("src/main/resources/templates/forms.docx"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidFormatException e) {
+            throw new RuntimeException(e);
+        }
+
+        for(Map.Entry<String, String> entry : replaceMaps.entrySet()){
+            try {
+                formToWordService.updateDocument(entry.getKey(), entry.getValue(), doc);
+            } catch (InvalidFormatException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        try {
+            doc.write(new FileOutputStream("/home/administrator/Downloads/output.docx"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         return result;
     }
