@@ -1,10 +1,12 @@
 package kz.jusan.hrapp.service.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import kz.jusan.hrapp.dto.DocumentTypeDto;
+import kz.jusan.hrapp.dto.FileDBDto;
 import kz.jusan.hrapp.model.FileDB;
 import kz.jusan.hrapp.repository.FileDBRepository;
 import kz.jusan.hrapp.repository.UserRepository;
@@ -43,8 +45,19 @@ public class FileStorageServiceImpl {
         return fileDBRepository.findById(id).get();
     }
 
-    public List<FileDB> getFilesByUserId(Long userId){
-        return fileDBRepository.findByUserId(userId);
+    @Transactional
+    public List<FileDBDto> getFilesByUserId(Long userId){
+        List<FileDB> fileDBS = fileDBRepository.findByUserId(userId);
+        List<FileDBDto> fileDBDtos = new ArrayList<>();
+        for (FileDB fileDB : fileDBS) {
+            FileDBDto fileDBDto = new FileDBDto();
+            fileDBDto.setId(fileDB.getId());
+            fileDBDto.setData(fileDB.getData());
+            fileDBDto.setType(fileDB.getType());
+            fileDBDto.setName(fileDB.getName());
+            fileDBDtos.add(fileDBDto);
+        }
+        return fileDBDtos;
     }
 
     public List<FileDB> getAllFiles() {

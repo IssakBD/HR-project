@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import kz.jusan.hrapp.dto.DocumentTypeDto;
+import kz.jusan.hrapp.dto.FileDBDto;
 import kz.jusan.hrapp.message.ResponseMessage;
 import kz.jusan.hrapp.model.FileDB;
 import kz.jusan.hrapp.model.User;
@@ -86,11 +87,9 @@ public class FileController {
     }
 
     @GetMapping("/download/{userId}")
-    public HashMap<String, List<FileDB>> getFile(@PathVariable("userId") Long userId) {
-        List<FileDB> fileDBs = storageService.getFilesByUserId(userId);
-        HashMap<String, List<FileDB>> answer = new HashMap<>();
-        answer.put("List of documents for current user: ", fileDBs);
-        return answer;
+    public List<FileDBDto> getFile(@PathVariable("userId") Long userId) {
+        List<FileDBDto> fileDBDtos = storageService.getFilesByUserId(userId);
+        return fileDBDtos;
     }
 
     @PostMapping("/generate/{userId}")
@@ -104,7 +103,7 @@ public class FileController {
 
         replaceMaps.put("IIN", mainInfo.getIin());
         replaceMaps.put("FIO", mainInfo.getFIO());
-        replaceMaps.put("EXNAME", mainInfo.getOldSurname());
+        replaceMaps.put("OLDNAME", mainInfo.getOldSurname());
         replaceMaps.put("BIRTHDAY", mainInfo.getDateOfBirthday());
         replaceMaps.put("ETHNICITY", mainInfo.getNationality());
         replaceMaps.put("CITIZENSHIP", mainInfo.getCitizenship());
@@ -112,7 +111,6 @@ public class FileController {
         replaceMaps.put("IDNUM", mainInfo.getDocumentNumber());
         replaceMaps.put("ISSUED", mainInfo.getDocumentIssued());
 
-        System.out.println(mainInfo.getOldSurname());
 
         XWPFDocument doc = null; //CHANGE PATH FOR THE ACTUAL ONE
         try {

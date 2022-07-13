@@ -33,7 +33,7 @@ public class FormToWordServiceImpl {
                                 String text = r.getText(0);
 
                                 if (text != null && text.contains(key)) {
-                                    if(value.equals(null)){
+                                    if(value == null){
                                         value = " ";
                                     }
                                     text = text.replace(key, value + "");
@@ -51,7 +51,7 @@ public class FormToWordServiceImpl {
                     for (XWPFRun r : runs) {
                         String text = r.getText(0);
                         if (text != null && text.contains(key)) {
-                            if(value.equals(null)){
+                            if(value == null){
                                 value = " ";
                             }
                             text = text.replace(key, value + "");
