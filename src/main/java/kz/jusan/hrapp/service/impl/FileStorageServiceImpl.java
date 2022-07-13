@@ -26,7 +26,7 @@ public class FileStorageServiceImpl {
     }
 
     @Transactional
-    public FileDB store(MultipartFile file, Long userId, String documentType) throws IOException {
+    public FileDB store(MultipartFile file, Long userId) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         FileDB fileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
         fileDB.setUser(userRepository.findById(userId).get());

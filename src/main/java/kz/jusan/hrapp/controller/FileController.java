@@ -42,17 +42,19 @@ public class FileController {
     }
 
     @PostMapping("/upload/{userId}")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable("userId") Long userId, @RequestParam("documentType") String documentType) {
+    public HashMap<String, String> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable("userId") Long userId) {
+        HashMap<String, String> answer = new HashMap<>();
         String message = "";
         try {
-            storageService.store(file, userId, documentType);
-
-            message = "Uploaded the file successfully: " + file.getOriginalFilename();
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+            FileDB fileDB = storageService.store(file, userId);
+            message = (String) fileDB.getId();
+            answer.put("fileId", message);
         } catch (Exception e) {
             message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+            answer.put("fileId", message);
+            return answer;
         }
+        return answer;
     }
 
 //    @GetMapping
