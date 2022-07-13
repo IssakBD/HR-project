@@ -221,4 +221,6 @@ public class MainInfoDto {
     private String additionalIncome;
 
     private String dateOfFillingIn;
+
+    private Boolean isAgreed;
 }

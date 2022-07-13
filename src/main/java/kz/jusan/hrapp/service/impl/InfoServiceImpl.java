@@ -145,6 +145,7 @@ public class InfoServiceImpl {
         mainInfo.setAdditionalInformation(mainInfoDto.getAdditionalInformation());
         mainInfo.setAdditionalIncome(mainInfoDto.getAdditionalIncome());
         mainInfo.setDateOfFillingIn(mainInfoDto.getDateOfFillingIn());
+        mainInfo.setIsAgreed(mainInfoDto.getIsAgreed());
         mainInfo.setUser(user);
         mainInfoRepository.save(mainInfo);
 
@@ -341,6 +342,7 @@ public class InfoServiceImpl {
             mainInfoDto.setAdditionalInformation(mainInfo.getAdditionalInformation());
             mainInfoDto.setAdditionalIncome(mainInfo.getAdditionalIncome());
             mainInfoDto.setDateOfFillingIn(mainInfo.getDateOfFillingIn());
+            mainInfoDto.setIsAgreed(mainInfo.getIsAgreed());
 
             List<UniversityInfo> universityInfos = universityInfoRepository.findByUserId(userId);
             List<UniversityInfoDto> universityInfoDtos = new ArrayList<>();

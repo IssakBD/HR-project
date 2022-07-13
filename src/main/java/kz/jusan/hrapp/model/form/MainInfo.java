@@ -318,6 +318,9 @@ public class MainInfo {
     @Column(name = "dateOfFillingIn")
     private String dateOfFillingIn;
 
+    @Column(name = "isAgreed")
+    private Boolean isAgreed;
+
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
