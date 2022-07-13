@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * REST controller user connected requestst.
@@ -43,6 +44,19 @@ public class UserRestControllerV1 {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+//    @GetMapping()
+//    public List<User> getUserById(){
+//        List<User> users = userService.getAll();
+//
+//        for (User user : users) {
+//
+//        }
+//
+//        UserDto result = UserDto.fromUser(user);
+//
+//        return new ResponseEntity<>(result, HttpStatus.OK);
+//    }
+
     @PostMapping("/sign-up")
     public HashMap<String, String> uploadFile(@RequestBody UserRegistrationDto userRegistrationDto) {
         HashMap<String, String> answer = new HashMap<>();
@@ -56,6 +70,7 @@ public class UserRestControllerV1 {
             answer.put("password", password);
         } catch (Exception e) {
             answer.put("answer", "User is not saved");
+            e.printStackTrace();
         }
         return answer;
     }

@@ -235,7 +235,7 @@ public class InfoServiceImpl {
     public MainInfoDto downloadMainInfo(Long userId){
          System.out.println("In service InfoServiceImpl");
 
-         MainInfo mainInfo = mainInfoRepository.findByUserId(userId).orElse(null);
+         MainInfo mainInfo = mainInfoRepository.findByUserId(userId).orElse(new MainInfo());
 
          MainInfoDto mainInfoDto = new MainInfoDto();
 

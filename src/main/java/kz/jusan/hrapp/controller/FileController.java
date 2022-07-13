@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @Slf4j
 @Tag(name = "Files")
 @RestController
+@RequestMapping(name = "/files")
 @CrossOrigin("http://localhost:8081")
 public class FileController {
 
@@ -40,7 +41,7 @@ public class FileController {
         }
     }
 
-    @GetMapping("/files")
+    @GetMapping
     public ResponseEntity<List<FileDB>> getListFiles() {
         List<FileDB> files = storageService.getAllFiles();
         log.debug(files.toString() + " - files");
@@ -63,7 +64,7 @@ public class FileController {
     }
 
 
-    @GetMapping("/files/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable String id) {
         FileDB fileDB = storageService.getFile(id);
 
