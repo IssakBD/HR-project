@@ -32,7 +32,7 @@ public class PhotoController {
     private UserService userService;
 
     @PostMapping("/upload/{user_id}")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable Long user_id) {
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("ruslan") MultipartFile file, @PathVariable Long user_id) {
         String message = "";
         try {
             storageService.store(file, userService.findById(user_id));

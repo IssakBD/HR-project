@@ -22,8 +22,13 @@ public class PhotoStorageServiceImpl {
 
     public Photo store(MultipartFile file, User user) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        Photo photo = new Photo(fileName, file.getContentType(), file.getBytes(), user);
-
+        System.out.println(user.getId());
+        Photo photo = photoRepository.findPhotoByUserId(user.getId()).orElse(new Photo());
+//        photo = new Photo(fileName, file.getContentType(), file.getBytes(), user);
+        photo.setName(fileName);
+        photo.setType(file.getContentType());
+        photo.setData(file.getBytes());
+        photo.setUser(user);
         return photoRepository.save(photo);
     }
 

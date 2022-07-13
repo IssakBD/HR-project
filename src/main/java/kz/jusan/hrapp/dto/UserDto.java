@@ -23,7 +23,7 @@ public class UserDto {
     private String lastName;
     private String email;
 
-//    private List<FileDB>
+    private List<FileDB> fileDBS;
 
     public User toUser(){
         User user = new User();
@@ -43,6 +43,7 @@ public class UserDto {
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
         userDto.setEmail(user.getEmail());
+        userDto.setFileDBS(user.getFileDBS());
 
         return userDto;
     }

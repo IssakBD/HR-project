@@ -2,10 +2,12 @@ package kz.jusan.hrapp.model;
 
 import javax.persistence.*;
 
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "files")
+@Data
 public class FileDB {
     @Id
     @GeneratedValue(generator = "uuid")
