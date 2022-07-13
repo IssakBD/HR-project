@@ -66,19 +66,24 @@ public class UserRestControllerV1 {
             User user = new User();
             user.setUsername(userRegistrationDto.getEmail());
             String password = String.valueOf(Math.floor(Math.random()*(1000-100+1)+100));
-            user.setPassword(password);
-            userService.register(user);
+
+            if(!userService.isUsernameExist(userRegistrationDto.getEmail())) {
+                user.setPassword(password);
+                userService.register(user);
 
 
-            answer.put("answer", "User is saved");
-            answer.put("password", password);
+                answer.put("answer", "User is saved");
+                answer.put("password", password);
 
-            String subject = new String("Добро пожаловать в Жусан Банк!");
-            String text = new String(" Вы автоматически зарегистрированы в систему приема документов." +
-                    "\n Ваш логин: " + userRegistrationDto.getEmail()
-            + "\n Ваш пароль: " + password);
+                String subject = new String("Добро пожаловать в Жусан Банк!");
+                String text = new String(" Вы автоматически зарегистрированы в систему приема документов." +
+                        "\n Ваш логин: " + userRegistrationDto.getEmail()
+                        + "\n Ваш пароль: " + password);
 
-            emailService.sendSimpleMessage(userRegistrationDto.getEmail(), subject, text);
+                emailService.sendSimpleMessage(userRegistrationDto.getEmail(), subject, text);
+            } else {
+                answer.put("answer", "User is exist");
+            }
         } catch (Exception e) {
             answer.put("answer", "User is not saved");
             e.printStackTrace();

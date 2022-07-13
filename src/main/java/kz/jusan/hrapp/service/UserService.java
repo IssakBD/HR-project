@@ -24,4 +24,6 @@ public interface UserService {
     void delete(Long id);
 
     UserDto fromUser(User user);
+
+    Boolean isUsernameExist(String username);
 }

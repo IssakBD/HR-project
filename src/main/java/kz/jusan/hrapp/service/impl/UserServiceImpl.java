@@ -117,4 +117,13 @@ public class UserServiceImpl implements UserService {
 
         return userDto;
     }
+
+    @Override
+    public Boolean isUsernameExist(String username) {
+        Boolean answer = true;
+        if(userRepository.findByUsername(username) == null){
+            answer = false;
+        }
+        return answer;
+    }
 }
