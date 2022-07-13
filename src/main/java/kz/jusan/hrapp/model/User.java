@@ -62,6 +62,9 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user")
     private List<RelativesInJusan> RelativesInJusan;
 
+    @OneToMany(mappedBy = "user")
+    private List<FileDB> fileDBS;
+
 
     @Override
     public String toString() {

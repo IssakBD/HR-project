@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(LOGIN_ENDPOINT,  "/swagger-ui/**", "/v3/api-docs/**", "/h2-console/**", "/photos/**", "/photos", "/users/sign-up", "/form/upload/info/*",  "/form/download/info/*", "/files/**", "/files").permitAll()
+                .antMatchers(LOGIN_ENDPOINT,  "/swagger-ui/**", "/v3/api-docs/**", "/h2-console/**", "/photos/**", "/photos", "/users/sign-up", "/form/upload/info/*",  "/form/download/info/*", "/files/**", "/files/*", "/upload", "/*").permitAll()
                 .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
                 //.antMatchers()
                 .anyRequest().authenticated()
@@ -53,8 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .apply(new JwtConfigurer(jwtTokenProvider));
     }
 
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers("/swagger-ui/", "/v3/api-docs/", "/h2-console/**");
-//    }
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/swagger-ui/", "/v3/api-docs/", "/h2-console/**");
+    }
 }

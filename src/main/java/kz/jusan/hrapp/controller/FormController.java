@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/form")
+@RequestMapping( "/form")
 @CrossOrigin("*")
 public class FormController {
 

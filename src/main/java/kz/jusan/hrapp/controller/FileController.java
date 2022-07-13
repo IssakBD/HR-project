@@ -20,8 +20,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @Slf4j
 @Tag(name = "Files")
 @RestController
-@RequestMapping(name = "/files")
-@CrossOrigin("http://localhost:8081")
+@RequestMapping("/files")
+@CrossOrigin("*")
 public class FileController {
 
     @Autowired

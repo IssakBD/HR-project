@@ -1,8 +1,11 @@
 package kz.jusan.hrapp.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import kz.jusan.hrapp.model.FileDB;
 import kz.jusan.hrapp.model.User;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * DTO class for user requests by ROLE_USER
@@ -19,6 +22,8 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String email;
+
+//    private List<FileDB>
 
     public User toUser(){
         User user = new User();
