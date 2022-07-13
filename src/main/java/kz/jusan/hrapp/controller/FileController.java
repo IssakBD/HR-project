@@ -1,6 +1,7 @@
 package kz.jusan.hrapp.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,8 +28,8 @@ public class FileController {
     @Autowired
     private FileStorageServiceImpl storageService;
 
-    @PostMapping("/upload/{id}")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable("id") Long userId, @RequestParam("documentType") String documentType) {
+    @PostMapping("/upload/{userId}")
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable("userId") Long userId, @RequestParam("documentType") String documentType) {
         String message = "";
         try {
             storageService.store(file, userId, documentType);
@@ -41,35 +42,43 @@ public class FileController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<List<FileDB>> getListFiles() {
-        List<FileDB> files = storageService.getAllFiles();
-        log.debug(files.toString() + " - files");
-        files.stream()
-                .map(dbFile -> {
-                    String fileDownloadUri = ServletUriComponentsBuilder
-                            .fromCurrentContextPath()
-                            .path("/files/")
-                            .path(dbFile.getId())
-                            .toUriString();
+//    @GetMapping
+//    public ResponseEntity<List<FileDB>> getListFiles() {
+//        List<FileDB> files = storageService.getAllFiles();
+//        log.debug(files.toString() + " - files");
+//        files.stream()
+//                .map(dbFile -> {
+//                    String fileDownloadUri = ServletUriComponentsBuilder
+//                            .fromCurrentContextPath()
+//                            .path("/files/")
+//                            .path(dbFile.getId())
+//                            .toUriString();
+//
+//                    return new ResponseFile(
+//                            dbFile.getName(),
+//                            fileDownloadUri,
+//                            dbFile.getType(),
+//                            dbFile.getData().length);
+//                }).collect(Collectors.toList());
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(files);
+//    }
 
-                    return new ResponseFile(
-                            dbFile.getName(),
-                            fileDownloadUri,
-                            dbFile.getType(),
-                            dbFile.getData().length);
-                }).collect(Collectors.toList());
 
-        return ResponseEntity.status(HttpStatus.OK).body(files);
-    }
-
-
-    @GetMapping("/{id}")
-    public ResponseEntity<byte[]> getFile(@PathVariable String id) {
+    @GetMapping("/get/{id}")
+    public ResponseEntity<byte[]> getFile(@PathVariable("id") String id) {
         FileDB fileDB = storageService.getFile(id);
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
                 .body(fileDB.getData());
+    }
+
+    @GetMapping("/download/{userId}")
+    public HashMap<String, List<FileDB>> getFile(@PathVariable("userId") Long userId) {
+        List<FileDB> fileDBs = storageService.getFilesByUserId(userId);
+        HashMap<String, List<FileDB>> answer = new HashMap<>();
+        answer.put("List of documents for current user: ", fileDBs);
+        return answer;
     }
 }

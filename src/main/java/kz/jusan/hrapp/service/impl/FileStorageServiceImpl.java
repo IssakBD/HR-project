@@ -39,6 +39,10 @@ public class FileStorageServiceImpl {
         return fileDBRepository.findById(id).get();
     }
 
+    public List<FileDB> getFilesByUserId(Long userId){
+        return fileDBRepository.findByUserId(userId);
+    }
+
     public List<FileDB> getAllFiles() {
         return fileDBRepository.findAll();
     }

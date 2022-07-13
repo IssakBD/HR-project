@@ -39,15 +39,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        //, "/photos/**", "/photos/upload/*" , "/photos", "/users/sign-up", "/form/upload/info/*",  "/form/download/info/*", "/files/**", "/files/*", "/upload", "/*", "/users/*
+
         http.cors().and()
                 .httpBasic().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(LOGIN_ENDPOINT,  "/swagger-ui/**", "/v3/api-docs/**", "/h2-console/**", "/photos/**", "/photos/upload/*" , "/photos", "/users/sign-up", "/form/upload/info/*",  "/form/download/info/*", "/files/**", "/files/*", "/upload", "/*", "/users/*").permitAll()
+                .antMatchers(LOGIN_ENDPOINT,  "/swagger-ui/**", "/v3/api-docs/**", "/h2-console/**", "/sing-in").permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
-                //.antMatchers()
                 .anyRequest().authenticated()
                 .and()
                 .apply(new JwtConfigurer(jwtTokenProvider));

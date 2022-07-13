@@ -45,30 +45,29 @@ public class PhotoController {
         }
     }
 
-    @GetMapping()
-    public ResponseEntity<List<Photo>> getListFiles() {
-        List<Photo> files = storageService.getAllFiles();
-        log.debug(files.toString() + " - files");
-        files.stream()
-                .map(photo -> {
-                    String fileDownloadUri = ServletUriComponentsBuilder
-                            .fromCurrentContextPath()
-                            .path("/photos/")
-                            .path(photo.getId().toString())
-                            .toUriString();
+//    @GetMapping()
+//    public ResponseEntity<List<Photo>> getListFiles() {
+//        List<Photo> files = storageService.getAllFiles();
+//        log.debug(files.toString() + " - files");
+//        files.stream()
+//                .map(photo -> {
+//                    String fileDownloadUri = ServletUriComponentsBuilder
+//                            .fromCurrentContextPath()
+//                            .path("/photos/")
+//                            .path(photo.getId().toString())
+//                            .toUriString();
+//
+//                    return new ResponseFile(
+//                            photo.getName(),
+//                            fileDownloadUri,
+//                            photo.getType(),
+//                            photo.getData().length);
+//                }).collect(Collectors.toList());
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(files);
+//    }
 
-                    return new ResponseFile(
-                            photo.getName(),
-                            fileDownloadUri,
-                            photo.getType(),
-                            photo.getData().length);
-                }).collect(Collectors.toList());
-
-        return ResponseEntity.status(HttpStatus.OK).body(files);
-    }
-
-
-    @GetMapping("{id}")
+    @GetMapping("/download/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable String id) {
         Photo photo = storageService.getFile(id);
 

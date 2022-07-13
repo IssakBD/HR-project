@@ -28,7 +28,6 @@ import java.util.Map;
  */
 
 @RestController
-@RequestMapping(value = "/")
 @CrossOrigin("*")
 public class AuthenticationRestControllerV1 {
 
@@ -52,7 +51,7 @@ public class AuthenticationRestControllerV1 {
     }
 
 
-    @PostMapping("sign-in")
+    @PostMapping("/sign-in")
     public Map<String, String> login(@RequestBody AuthenticationRequestDto requestDto) {
         try {
             String username = requestDto.getUsername();
@@ -63,6 +62,8 @@ public class AuthenticationRestControllerV1 {
                 throw new UsernameNotFoundException("User with username: " + username + " not found");
             }
 
+
+
             String token = jwtTokenProvider.createToken(username, user.getRoles());
 
             Map<String, String> response = new HashMap<>();
@@ -70,13 +71,13 @@ public class AuthenticationRestControllerV1 {
             response.put("token", token);
             response.put("id", user.getId().toString());
 
-            try {
-                formToWordService.updateDocument(new ArrayList<>());
-            } catch (InvalidFormatException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+//            try {
+//                formToWordService.updateDocument(new ArrayList<>());
+//            } catch (InvalidFormatException e) {
+//                throw new RuntimeException(e);
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
 
             return response;
 

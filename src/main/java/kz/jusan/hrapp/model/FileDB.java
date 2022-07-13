@@ -25,7 +25,7 @@ public class FileDB {
     private byte[] data;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     public FileDB() {
