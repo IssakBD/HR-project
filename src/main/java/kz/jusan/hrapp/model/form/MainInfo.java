@@ -322,4 +322,112 @@ public class MainInfo {
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @Override
+    public String toString() {
+        return "MainInfo{" +
+                "id=" + id +
+                ", iin='" + iin + '\'' +
+                ", FIO='" + FIO + '\'' +
+                ", oldSurname='" + oldSurname + '\'' +
+                ", dateOfBirthday='" + dateOfBirthday + '\'' +
+                ", placeOfBirth='" + placeOfBirth + '\'' +
+                ", nationality='" + nationality + '\'' +
+                ", citizenship='" + citizenship + '\'' +
+                ", documentSeries='" + documentSeries + '\'' +
+                ", documentNumber='" + documentNumber + '\'' +
+                ", documentIssued='" + documentIssued + '\'' +
+                ", homePhoneNumber='" + homePhoneNumber + '\'' +
+                ", workPhoneNumber='" + workPhoneNumber + '\'' +
+                ", mobilePhoneNumber='" + mobilePhoneNumber + '\'' +
+                ", contactPersonFio='" + contactPersonFio + '\'' +
+                ", contactPersonDegreeOfRelationship='" + contactPersonDegreeOfRelationship + '\'' +
+                ", contactPersonPhoneNumber='" + contactPersonPhoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", permanentRegistrationAddressCity='" + permanentRegistrationAddressCity + '\'' +
+                ", permanentRegistrationAddressDistrict='" + permanentRegistrationAddressDistrict + '\'' +
+                ", permanentRegistrationAddressRegion='" + permanentRegistrationAddressRegion + '\'' +
+                ", permanentRegistrationAddressStreet='" + permanentRegistrationAddressStreet + '\'' +
+                ", permanentRegistrationAddressHouseNumber='" + permanentRegistrationAddressHouseNumber + '\'' +
+                ", permanentRegistrationAddressCorpus='" + permanentRegistrationAddressCorpus + '\'' +
+                ", permanentRegistrationAddressApartment='" + permanentRegistrationAddressApartment + '\'' +
+                ", actualAddressCity='" + actualAddressCity + '\'' +
+                ", actualAddressDistrict='" + actualAddressDistrict + '\'' +
+                ", actualAddressRegion='" + actualAddressRegion + '\'' +
+                ", actualAddressStreet='" + actualAddressStreet + '\'' +
+                ", actualAddressHouseNumber='" + actualAddressHouseNumber + '\'' +
+                ", actualAddressCorpus='" + actualAddressCorpus + '\'' +
+                ", actualAddressApartment='" + actualAddressApartment + '\'' +
+                ", startOfWorkingOne='" + startOfWorkingOne + '\'' +
+                ", endOfWorkingOne='" + endOfWorkingOne + '\'' +
+                ", workingPlaceInfoOne='" + workingPlaceInfoOne + '\'' +
+                ", workTypeOne='" + workTypeOne + '\'' +
+                ", workingPlaceAddressOne='" + workingPlaceAddressOne + '\'' +
+                ", workingPlacePhoneNumberOne='" + workingPlacePhoneNumberOne + '\'' +
+                ", positionOne='" + positionOne + '\'' +
+                ", managerFullNameOne='" + managerFullNameOne + '\'' +
+                ", managerPhoneNumberOne='" + managerPhoneNumberOne + '\'' +
+                ", reasonForDismissalOne='" + reasonForDismissalOne + '\'' +
+                ", startOfWorkingTwo='" + startOfWorkingTwo + '\'' +
+                ", endOfWorkingTwo='" + endOfWorkingTwo + '\'' +
+                ", workingPlaceInfoTwo='" + workingPlaceInfoTwo + '\'' +
+                ", workTypeTwo='" + workTypeTwo + '\'' +
+                ", workingPlaceAddressTwo='" + workingPlaceAddressTwo + '\'' +
+                ", workingPlacePhoneNumberTwo='" + workingPlacePhoneNumberTwo + '\'' +
+                ", positionTwo='" + positionTwo + '\'' +
+                ", managerFullNameTwo='" + managerFullNameTwo + '\'' +
+                ", managerPhoneNumberTwo='" + managerPhoneNumberTwo + '\'' +
+                ", reasonForDismissalTwo='" + reasonForDismissalTwo + '\'' +
+                ", startOfWorkingThree='" + startOfWorkingThree + '\'' +
+                ", endOfWorkingThree='" + endOfWorkingThree + '\'' +
+                ", workingPlaceNameThree='" + workingPlaceNameThree + '\'' +
+                ", workTypeThree='" + workTypeThree + '\'' +
+                ", workingPlaceAddressThree='" + workingPlaceAddressThree + '\'' +
+                ", workingPlacePhoneNumberThree='" + workingPlacePhoneNumberThree + '\'' +
+                ", positionThree='" + positionThree + '\'' +
+                ", managerFullNameThree='" + managerFullNameThree + '\'' +
+                ", managerPhoneNumberThree='" + managerPhoneNumberThree + '\'' +
+                ", reasonForDismissalThree='" + reasonForDismissalThree + '\'' +
+                ", profRefFullName1='" + profRefFullName1 + '\'' +
+                ", profRefWorkPlace1='" + profRefWorkPlace1 + '\'' +
+                ", profRefWorkPosition1='" + profRefWorkPosition1 + '\'' +
+                ", profRefTel1='" + profRefTel1 + '\'' +
+                ", profRefFullName2='" + profRefFullName2 + '\'' +
+                ", profRefWorkPlace2='" + profRefWorkPlace2 + '\'' +
+                ", profRefWorkPosition2='" + profRefWorkPosition2 + '\'' +
+                ", profRefTel2='" + profRefTel2 + '\'' +
+                ", profRefFullName3='" + profRefFullName3 + '\'' +
+                ", profRefWorkPlace3='" + profRefWorkPlace3 + '\'' +
+                ", profRefWorkPosition3='" + profRefWorkPosition3 + '\'' +
+                ", profRefTel3='" + profRefTel3 + '\'' +
+                ", maritalStatus='" + maritalStatus + '\'' +
+                ", spouseFIO='" + spouseFIO + '\'' +
+                ", spouseDateOfBirthday='" + spouseDateOfBirthday + '\'' +
+                ", spouseWorkingInfo='" + spouseWorkingInfo + '\'' +
+                ", spouseWorkingPosition='" + spouseWorkingPosition + '\'' +
+                ", spouseAddress='" + spouseAddress + '\'' +
+                ", spouseCitizenship='" + spouseCitizenship + '\'' +
+                ", spouseContacts='" + spouseContacts + '\'' +
+                ", carModel='" + carModel + '\'' +
+                ", carYearOfManufacture='" + carYearOfManufacture + '\'' +
+                ", carNumber='" + carNumber + '\'' +
+                ", militaryStatus='" + militaryStatus + '\'' +
+                ", benefitsStatus='" + benefitsStatus + '\'' +
+                ", overdueLoanStatus='" + overdueLoanStatus + '\'' +
+                ", overdueLoanReason='" + overdueLoanReason + '\'' +
+                ", criminalLiabilityStatus='" + criminalLiabilityStatus + '\'' +
+                ", criminalLiabilityReason='" + criminalLiabilityReason + '\'' +
+                ", relativesCriminalCaseStatus='" + relativesCriminalCaseStatus + '\'' +
+                ", relativesCriminalCaseReason='" + relativesCriminalCaseReason + '\'' +
+                ", criminalCaseStatus='" + criminalCaseStatus + '\'' +
+                ", criminalCaseReason='" + criminalCaseReason + '\'' +
+                ", alimonyStatus='" + alimonyStatus + '\'' +
+                ", alimonyReason='" + alimonyReason + '\'' +
+                ", administrativeLiabilityStatus='" + administrativeLiabilityStatus + '\'' +
+                ", administrativeLiabilityReason='" + administrativeLiabilityReason + '\'' +
+                ", additionalInformation='" + additionalInformation + '\'' +
+                ", additionalIncome='" + additionalIncome + '\'' +
+                ", dateOfFillingIn='" + dateOfFillingIn + '\'' +
+                '}';
+    }
 }

@@ -231,4 +231,202 @@ public class InfoServiceImpl {
     public Optional<MainInfo> findByUserId(Long user_id) {
         return mainInfoRepository.findByUserId(user_id);
     }
+
+    public MainInfoDto downloadMainInfo(Long userId){
+         System.out.println("In service InfoServiceImpl");
+
+         MainInfo mainInfo = mainInfoRepository.findByUserId(userId).orElse(null);
+
+         MainInfoDto mainInfoDto = new MainInfoDto();
+
+        if(mainInfo != null){
+            mainInfoDto.setIin(mainInfo.getIin());
+            mainInfoDto.setFIO(mainInfo.getFIO());
+            mainInfoDto.setOldSurname(mainInfo.getOldSurname());
+            mainInfoDto.setDateOfBirthday(mainInfo.getDateOfBirthday());
+            mainInfoDto.setPlaceOfBirth(mainInfo.getPlaceOfBirth());
+            mainInfoDto.setNationality(mainInfo.getNationality());
+            mainInfoDto.setCitizenship(mainInfo.getCitizenship());
+            mainInfoDto.setDocumentSeries(mainInfo.getDocumentSeries());
+            mainInfoDto.setDocumentNumber(mainInfo.getDocumentNumber());
+            mainInfoDto.setDocumentIssued(mainInfo.getDocumentIssued());
+            mainInfoDto.setHomePhoneNumber(mainInfo.getHomePhoneNumber());
+            mainInfoDto.setWorkPhoneNumber(mainInfo.getWorkPhoneNumber());
+            mainInfoDto.setMobilePhoneNumber(mainInfo.getMobilePhoneNumber());
+            mainInfoDto.setContactPersonFio(mainInfo.getContactPersonFio());
+            mainInfoDto.setContactPersonDegreeOfRelationship(mainInfo.getContactPersonDegreeOfRelationship());
+            mainInfoDto.setContactPersonPhoneNumber(mainInfo.getContactPersonPhoneNumber());
+            mainInfoDto.setEmail(mainInfo.getEmail());
+            mainInfoDto.setPermanentRegistrationAddressCity(mainInfo.getPermanentRegistrationAddressCity());
+            mainInfoDto.setPermanentRegistrationAddressDistrict(mainInfo.getPermanentRegistrationAddressDistrict());
+            mainInfoDto.setPermanentRegistrationAddressRegion(mainInfo.getPermanentRegistrationAddressRegion());
+            mainInfoDto.setPermanentRegistrationAddressStreet(mainInfo.getPermanentRegistrationAddressStreet());
+            mainInfoDto.setPermanentRegistrationAddressHouseNumber(mainInfo.getPermanentRegistrationAddressHouseNumber());
+            mainInfoDto.setPermanentRegistrationAddressCorpus(mainInfo.getPermanentRegistrationAddressCorpus());
+            mainInfoDto.setPermanentRegistrationAddressApartment(mainInfo.getPermanentRegistrationAddressApartment());
+            mainInfoDto.setActualAddressCity(mainInfo.getActualAddressCity());
+            mainInfoDto.setActualAddressDistrict(mainInfo.getActualAddressDistrict());
+            mainInfoDto.setActualAddressRegion(mainInfo.getActualAddressRegion());
+            mainInfoDto.setActualAddressStreet(mainInfo.getActualAddressStreet());
+            mainInfoDto.setActualAddressHouseNumber(mainInfo.getActualAddressHouseNumber());
+            mainInfoDto.setActualAddressCorpus(mainInfo.getActualAddressCorpus());
+            mainInfoDto.setActualAddressApartment(mainInfo.getActualAddressApartment());
+            mainInfoDto.setStartOfWorkingOne(mainInfo.getStartOfWorkingOne());
+            mainInfoDto.setEndOfWorkingOne(mainInfo.getEndOfWorkingOne());
+            mainInfoDto.setWorkingPlaceInfoOne(mainInfo.getWorkingPlaceInfoOne());
+            mainInfoDto.setWorkTypeOne(mainInfo.getWorkTypeOne());
+            mainInfoDto.setWorkingPlaceAddressOne(mainInfo.getWorkingPlaceAddressOne());
+            mainInfoDto.setWorkingPlacePhoneNumberOne(mainInfo.getWorkingPlacePhoneNumberOne());
+            mainInfoDto.setPositionOne(mainInfo.getPositionOne());
+            mainInfoDto.setManagerFullNameOne(mainInfo.getManagerFullNameOne());
+            mainInfoDto.setManagerPhoneNumberOne(mainInfo.getManagerPhoneNumberOne());
+            mainInfoDto.setReasonForDismissalOne(mainInfo.getReasonForDismissalOne());
+            mainInfoDto.setStartOfWorkingTwo(mainInfo.getStartOfWorkingTwo());
+            mainInfoDto.setEndOfWorkingTwo(mainInfo.getEndOfWorkingTwo());
+            mainInfoDto.setWorkingPlaceInfoTwo(mainInfo.getWorkingPlaceInfoTwo());
+            mainInfoDto.setWorkTypeTwo(mainInfo.getWorkTypeTwo());
+            mainInfoDto.setWorkingPlaceAddressTwo(mainInfo.getWorkingPlaceAddressTwo());
+            mainInfoDto.setWorkingPlacePhoneNumberTwo(mainInfo.getWorkingPlacePhoneNumberTwo());
+            mainInfoDto.setPositionTwo(mainInfo.getPositionTwo());
+            mainInfoDto.setManagerFullNameTwo(mainInfo.getManagerFullNameTwo());
+            mainInfoDto.setManagerPhoneNumberTwo(mainInfo.getManagerPhoneNumberTwo());
+            mainInfoDto.setReasonForDismissalTwo(mainInfo.getReasonForDismissalTwo());
+            mainInfoDto.setStartOfWorkingThree(mainInfo.getStartOfWorkingThree());
+            mainInfoDto.setEndOfWorkingThree(mainInfo.getEndOfWorkingThree());
+            mainInfoDto.setWorkingPlaceNameThree(mainInfo.getWorkingPlaceNameThree());
+            mainInfoDto.setWorkTypeThree(mainInfo.getWorkTypeThree());
+            mainInfoDto.setWorkingPlaceAddressThree(mainInfo.getWorkingPlaceAddressThree());
+            mainInfoDto.setWorkingPlacePhoneNumberThree(mainInfo.getWorkingPlacePhoneNumberThree());
+            mainInfoDto.setPositionThree(mainInfo.getPositionThree());
+            mainInfoDto.setManagerFullNameThree(mainInfo.getManagerFullNameThree());
+            mainInfoDto.setManagerPhoneNumberThree(mainInfo.getManagerPhoneNumberThree());
+            mainInfoDto.setReasonForDismissalThree(mainInfo.getReasonForDismissalThree());
+            mainInfoDto.setProfRefFullName1(mainInfo.getProfRefFullName1());
+            mainInfoDto.setProfRefWorkPlace1(mainInfo.getProfRefWorkPlace1());
+            mainInfoDto.setProfRefWorkPosition1(mainInfo.getProfRefWorkPosition1());
+            mainInfoDto.setProfRefTel1(mainInfo.getProfRefTel1());
+            mainInfoDto.setProfRefFullName2(mainInfo.getProfRefFullName2());
+            mainInfoDto.setProfRefWorkPlace2(mainInfo.getProfRefWorkPlace2());
+            mainInfoDto.setProfRefWorkPosition2(mainInfo.getProfRefWorkPosition2());
+            mainInfoDto.setProfRefTel2(mainInfo.getProfRefTel2());
+            mainInfoDto.setProfRefFullName3(mainInfo.getProfRefFullName3());
+            mainInfoDto.setProfRefWorkPlace3(mainInfo.getProfRefWorkPlace3());
+            mainInfoDto.setProfRefWorkPosition3(mainInfo.getProfRefWorkPosition3());
+            mainInfoDto.setProfRefTel3(mainInfo.getProfRefTel3());
+            mainInfoDto.setMaritalStatus(mainInfo.getMaritalStatus());
+            mainInfoDto.setSpouseFIO(mainInfo.getSpouseFIO());
+            mainInfoDto.setSpouseDateOfBirthday(mainInfo.getSpouseDateOfBirthday());
+            mainInfoDto.setSpouseWorkingInfo(mainInfo.getSpouseWorkingInfo());
+            mainInfoDto.setSpouseWorkingPosition(mainInfo.getSpouseWorkingPosition());
+            mainInfoDto.setSpouseAddress(mainInfo.getSpouseAddress());
+            mainInfoDto.setSpouseCitizenship(mainInfo.getSpouseCitizenship());
+            mainInfoDto.setSpouseContacts(mainInfo.getSpouseContacts());
+            mainInfoDto.setCarModel(mainInfo.getCarModel());
+            mainInfoDto.setCarYearOfManufacture(mainInfo.getCarYearOfManufacture());
+            mainInfoDto.setCarNumber(mainInfo.getCarNumber());
+            mainInfoDto.setMilitaryStatus(mainInfo.getMilitaryStatus());
+            mainInfoDto.setBenefitsStatus(mainInfo.getBenefitsStatus());
+            mainInfoDto.setOverdueLoanStatus(mainInfo.getOverdueLoanStatus());
+            mainInfoDto.setOverdueLoanReason(mainInfo.getOverdueLoanReason());
+            mainInfoDto.setCriminalLiabilityStatus(mainInfo.getCriminalLiabilityStatus());
+            mainInfoDto.setCriminalLiabilityReason(mainInfo.getCriminalLiabilityReason());
+            mainInfoDto.setRelativesCriminalCaseStatus(mainInfo.getRelativesCriminalCaseStatus());
+            mainInfoDto.setRelativesCriminalCaseReason(mainInfo.getRelativesCriminalCaseReason());
+            mainInfoDto.setCriminalCaseStatus(mainInfo.getCriminalCaseStatus());
+            mainInfoDto.setCriminalCaseReason(mainInfo.getCriminalCaseReason());
+            mainInfoDto.setAlimonyStatus(mainInfo.getAlimonyStatus());
+            mainInfoDto.setAlimonyReason(mainInfo.getAlimonyReason());
+            mainInfoDto.setAdministrativeLiabilityStatus(mainInfo.getAdministrativeLiabilityStatus());
+            mainInfoDto.setAdministrativeLiabilityReason(mainInfo.getAdministrativeLiabilityReason());
+            mainInfoDto.setAdditionalInformation(mainInfo.getAdditionalInformation());
+            mainInfoDto.setAdditionalIncome(mainInfo.getAdditionalIncome());
+            mainInfoDto.setDateOfFillingIn(mainInfo.getDateOfFillingIn());
+
+            List<UniversityInfo> universityInfos = universityInfoRepository.findByUserId(userId);
+            List<UniversityInfoDto> universityInfoDtos = new ArrayList<>();
+            for (UniversityInfo universityInfo : universityInfos) {
+                UniversityInfoDto universityInfoDto = new UniversityInfoDto();
+                universityInfoDto.setStartDateOfEducation(universityInfo.getStartDateOfEducation());
+                universityInfoDto.setEndDateOfEducation(universityInfo.getEndDateOfEducation());
+                universityInfoDto.setNameOfInstitution(universityInfo.getNameOfInstitution());
+                universityInfoDto.setSpeciality(universityInfo.getSpeciality());
+                universityInfoDto.setFormOfStudy(universityInfo.getFormOfStudy());
+                universityInfoDto.setQualification(universityInfo.getQualification());
+                universityInfoDtos.add(universityInfoDto);
+            }
+            mainInfoDto.setUniversityInfoDtos(universityInfoDtos);
+
+
+            List<AdditionalEducationInfo> additionalEducationInfos = additionalEducationInfoRepository.findByUserId(userId);
+            List<AdditionalEducationInfoDto> additionalEducationInfoDtos = new ArrayList<>();
+            for (AdditionalEducationInfo info : additionalEducationInfos) {
+                AdditionalEducationInfoDto additionalEducationInfoDto = new AdditionalEducationInfoDto();
+                additionalEducationInfoDto.setDurationOfTraining(info.getDurationOfTraining());
+                additionalEducationInfoDto.setYearOfGraduation(info.getYearOfGraduation());
+                additionalEducationInfoDto.setNameOfCourse(info.getNameOfCourse());
+                additionalEducationInfoDto.setSpeciality(info.getSpeciality());
+                additionalEducationInfoDto.setYearOfGraduation(info.getYearOfGraduation());
+                additionalEducationInfoDto.setAcademicDegreeOrCertificates(info.getAcademicDegreeOrCertificates());
+                additionalEducationInfoDtos.add(additionalEducationInfoDto);
+            }
+            mainInfoDto.setAdditionalEducationInfoDtos(additionalEducationInfoDtos);
+
+
+            List<ChildrenInfo> childrenInfos = childrenInfoRepository.findByUserId(userId);
+            List<ChildrenInfoDto> childrenInfoDtos = new ArrayList<>();
+            for (ChildrenInfo info : childrenInfos) {
+                ChildrenInfoDto childrenInfoDto = new ChildrenInfoDto();
+                childrenInfoDto.setFIO(info.getFIO());
+                childrenInfoDto.setDateOfBirthday(info.getDateOfBirthday());
+                childrenInfoDto.setWorkPlace(info.getWorkPlace());
+                childrenInfoDto.setPhoneNumber(info.getPhoneNumber());
+                childrenInfoDtos.add(childrenInfoDto);
+            }
+            mainInfoDto.setChildrenInfoDtos(childrenInfoDtos);
+
+
+            List<RelativesInfo> relativesInfos = relativesInfoRepository.findByUserId(userId);
+            List<RelativesInfoDto> relativesInfoDtos = new ArrayList<>();
+            for (RelativesInfo info : relativesInfos) {
+                RelativesInfoDto relativesInfoDto = new RelativesInfoDto();
+                relativesInfoDto.setFIO(info.getFIO());
+                relativesInfoDto.setDateOfBirthday(info.getDateOfBirthday());
+                relativesInfoDto.setAddress(info.getAddress());
+                relativesInfoDto.setPhoneNumber(info.getPhoneNumber());
+                relativesInfoDto.setDegreeOfRelationship(info.getDegreeOfRelationship());
+                relativesInfoDto.setWorkingPlace(info.getWorkingPlace());
+                relativesInfoDto.setWorkingPosition(info.getWorkingPosition());
+                relativesInfoDtos.add(relativesInfoDto);
+            }
+            mainInfoDto.setRelativesInfoDtos(relativesInfoDtos);
+
+
+            List<AdditionalWorkingInfo> additionalWorkingInfos = additionalWorkingInfoRepository.findByUserId(userId);
+            List<AdditionalWorkingInfoDto> additionalWorkingInfoDtos = new ArrayList<>();
+            for (AdditionalWorkingInfo info : additionalWorkingInfos) {
+                AdditionalWorkingInfoDto additionalWorkingInfoDto = new AdditionalWorkingInfoDto();
+                additionalWorkingInfoDto.setTypeOfWork(info.getTypeOfWork());
+                additionalWorkingInfoDto.setInn(info.getInn());
+                additionalWorkingInfoDto.setAddress(info.getAddress());
+                additionalWorkingInfoDto.setPhoneNumber(info.getPhoneNumber());
+                additionalWorkingInfoDto.setName(info.getName());
+                additionalWorkingInfoDtos.add(additionalWorkingInfoDto);
+            }
+            mainInfoDto.setAdditionalWorkingInfoDtos(additionalWorkingInfoDtos);
+
+
+            List<RelativesInJusan> relativesInJusans = relativesInJusanRepository.findByUserId(userId);
+            List<RelativesInJusanDto> relativesInJusanDtos = new ArrayList<>();
+            for (RelativesInJusan info : relativesInJusans) {
+                RelativesInJusanDto relativesInJusanDto = new RelativesInJusanDto();
+                relativesInJusanDto.setFIO(info.getFIO());
+                relativesInJusanDto.setDegreeOfRelationship(info.getDegreeOfRelationship());
+                relativesInJusanDto.setDepartmentAndPosition(info.getDepartmentAndPosition());
+                relativesInJusanDtos.add(relativesInJusanDto);
+            }
+            mainInfoDto.setRelativesInJusanDtos(relativesInJusanDtos);
+
+         }
+        return mainInfoDto;
+    }
 }

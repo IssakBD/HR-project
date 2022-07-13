@@ -42,16 +42,10 @@ public class FormController {
     public MainInfoDto downloadMainInfo(@PathVariable("user_id") Long user_id) {
         MainInfoDto mainInfoDto = new MainInfoDto();
         try {
-            MainInfo mainInfo = infoService.findByUserId(user_id).orElse(null);
-            mainInfoDto.setIin(mainInfo.getIin());
-            mainInfoDto.setFIO(mainInfo.getFIO());
-            mainInfoDto.setDateOfBirthday(mainInfo.getDateOfBirthday());
-            mainInfoDto.setPlaceOfBirth(mainInfo.getPlaceOfBirth());
-            mainInfoDto.setNationality(mainInfo.getNationality());
-            mainInfoDto.setCitizenship(mainInfo.getCitizenship());
+             mainInfoDto = infoService.downloadMainInfo(user_id);
         } catch (Exception e) {
+            e.printStackTrace();
         }
-
         return mainInfoDto;
     }
 
