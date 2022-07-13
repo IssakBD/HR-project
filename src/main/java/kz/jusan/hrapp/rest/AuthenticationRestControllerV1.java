@@ -1,13 +1,13 @@
 package kz.jusan.hrapp.rest;
 
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import kz.jusan.hrapp.dto.AuthenticationRequestDto;
 import kz.jusan.hrapp.model.User;
 import kz.jusan.hrapp.repository.UserRepository;
 import kz.jusan.hrapp.security.jwt.JwtTokenProvider;
 import kz.jusan.hrapp.service.UserService;
+import kz.jusan.hrapp.service.impl.FormToWordServiceImpl;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,6 +15,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,12 +40,15 @@ public class AuthenticationRestControllerV1 {
 
     private  final UserRepository userRepository;
 
+    private final FormToWordServiceImpl formToWordService;
+
     @Autowired
-    public AuthenticationRestControllerV1(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService, UserRepository userRepository) {
+    public AuthenticationRestControllerV1(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService, UserRepository userRepository, FormToWordServiceImpl formToWordService) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         this.userService = userService;
         this.userRepository = userRepository;
+        this.formToWordService = formToWordService;
     }
 
 
@@ -65,7 +70,16 @@ public class AuthenticationRestControllerV1 {
             response.put("token", token);
             response.put("id", user.getId().toString());
 
+            try {
+                formToWordService.updateDocument(new ArrayList<>());
+            } catch (InvalidFormatException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
             return response;
+
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username or password");
         }
