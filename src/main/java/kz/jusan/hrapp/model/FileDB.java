@@ -16,9 +16,10 @@ public class FileDB {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
+    private String documentType;
     private String name;
-
     private String type;
+
 
     @Lob
     private byte[] data;

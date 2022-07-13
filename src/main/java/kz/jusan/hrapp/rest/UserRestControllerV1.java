@@ -3,15 +3,14 @@ package kz.jusan.hrapp.rest;
 import kz.jusan.hrapp.dto.UserDto;
 import kz.jusan.hrapp.dto.UserRegistrationDto;
 import kz.jusan.hrapp.model.User;
-import kz.jusan.hrapp.model.form.MainInfo;
 import kz.jusan.hrapp.service.UserService;
+import kz.jusan.hrapp.service.impl.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * REST controller user connected requestst.
@@ -26,9 +25,12 @@ import java.util.List;
 public class UserRestControllerV1 {
     private final UserService userService;
 
+    private final EmailServiceImpl emailService;
+
     @Autowired
-    public UserRestControllerV1(UserService userService) {
+    public UserRestControllerV1(UserService userService, EmailServiceImpl emailService) {
         this.userService = userService;
+        this.emailService = emailService;
     }
 
     @GetMapping(value = "/{id}")
@@ -66,8 +68,17 @@ public class UserRestControllerV1 {
             String password = String.valueOf(Math.floor(Math.random()*(1000-100+1)+100));
             user.setPassword(password);
             userService.register(user);
+
+
             answer.put("answer", "User is saved");
             answer.put("password", password);
+
+            String subject = new String("Добро пожаловать в Жусан Банк!");
+            String text = new String(" Вы автоматически зарегистрированы в систему приема документов." +
+                    "\n Ваш логин: " + userRegistrationDto.getEmail()
+            + "\n Ваш пароль: " + password);
+
+            emailService.sendSimpleMessage(userRegistrationDto.getEmail(), subject, text);
         } catch (Exception e) {
             answer.put("answer", "User is not saved");
             e.printStackTrace();
