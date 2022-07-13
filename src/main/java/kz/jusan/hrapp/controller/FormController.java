@@ -42,7 +42,7 @@ public class FormController {
     public MainInfoDto downloadMainInfo(@PathVariable("user_id") Long user_id) {
         MainInfoDto mainInfoDto = new MainInfoDto();
         try {
-            MainInfo mainInfo = infoService.findById(user_id).get();
+            MainInfo mainInfo = infoService.findByUserId(user_id).orElse(null);
             mainInfoDto.setIin(mainInfo.getIin());
             mainInfoDto.setFIO(mainInfo.getFIO());
             mainInfoDto.setDateOfBirthday(mainInfo.getDateOfBirthday());

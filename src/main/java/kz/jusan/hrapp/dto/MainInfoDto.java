@@ -163,6 +163,8 @@ public class MainInfoDto {
 
     private String spouseFIO;
 
+    private String spouseDateOfBirthday;
+
     private String spouseWorkingInfo;
 
     private String spouseWorkingPosition;

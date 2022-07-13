@@ -25,12 +25,12 @@ public class InfoServiceImpl {
     private final RelativesInJusanRepository relativesInJusanRepository;
     private final UniversityInfoRepository universityInfoRepository;
 
-    private final FormToWordServiceImpl formToWordService;
+
 
     private final UserService userService;
 
     @Autowired
-    public InfoServiceImpl(MainInfoRepository mainInfoRepository, AdditionalEducationInfoRepository additionalEducationInfoRepository, AdditionalWorkingInfoRepository additionalWorkingInfoRepository, ChildrenInfoRepository childrenInfoRepository, RelativesInfoRepository relativesInfoRepository, RelativesInJusanRepository relativesInJusanRepository, UniversityInfoRepository universityInfoRepository, UserRepository userRepository, FormToWordServiceImpl formToWordService, UserService userService) {
+    public InfoServiceImpl(MainInfoRepository mainInfoRepository, AdditionalEducationInfoRepository additionalEducationInfoRepository, AdditionalWorkingInfoRepository additionalWorkingInfoRepository, ChildrenInfoRepository childrenInfoRepository, RelativesInfoRepository relativesInfoRepository, RelativesInJusanRepository relativesInJusanRepository, UniversityInfoRepository universityInfoRepository, UserRepository userRepository, UserService userService) {
         this.mainInfoRepository = mainInfoRepository;
         this.additionalEducationInfoRepository = additionalEducationInfoRepository;
         this.additionalWorkingInfoRepository = additionalWorkingInfoRepository;
@@ -38,13 +38,12 @@ public class InfoServiceImpl {
         this.relativesInfoRepository = relativesInfoRepository;
         this.relativesInJusanRepository = relativesInJusanRepository;
         this.universityInfoRepository = universityInfoRepository;
-        this.formToWordService = formToWordService;
         this.userService = userService;
     }
 
     public void save(MainInfoDto mainInfoDto, Long userId){
         User user = userService.findById(userId);
-        MainInfo mainInfo = new MainInfo();
+        MainInfo mainInfo = mainInfoRepository.findByUserId(userId).orElse(new MainInfo());
         mainInfo.setIin(mainInfoDto.getIin());
         mainInfo.setFIO(mainInfoDto.getFIO());
         mainInfo.setOldSurname(mainInfoDto.getOldSurname());
@@ -120,6 +119,7 @@ public class InfoServiceImpl {
         mainInfo.setProfRefTel3(mainInfoDto.getProfRefTel3());
         mainInfo.setMaritalStatus(mainInfoDto.getMaritalStatus());
         mainInfo.setSpouseFIO(mainInfoDto.getSpouseFIO());
+        mainInfo.setSpouseDateOfBirthday(mainInfoDto.getSpouseDateOfBirthday());
         mainInfo.setSpouseWorkingInfo(mainInfoDto.getSpouseWorkingInfo());
         mainInfo.setSpouseWorkingPosition(mainInfoDto.getSpouseWorkingPosition());
         mainInfo.setSpouseAddress(mainInfoDto.getSpouseAddress());

@@ -318,7 +318,8 @@ public class MainInfo {
     @Column(name = "dateOfFillingIn")
     private String dateOfFillingIn;
 
-    @OneToOne()
+
+    @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 }
