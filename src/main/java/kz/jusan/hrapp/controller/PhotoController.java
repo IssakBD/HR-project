@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Tag(name = "Photos")
 @RestController
+@RequestMapping("/photos")
 @CrossOrigin("*")
 public class PhotoController {
 
@@ -30,7 +31,7 @@ public class PhotoController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/upload/photo/{user_id}")
+    @PostMapping("/upload/{user_id}")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable Long user_id) {
         String message = "";
         try {
@@ -44,7 +45,7 @@ public class PhotoController {
         }
     }
 
-    @GetMapping("/photos")
+    @GetMapping()
     public ResponseEntity<List<Photo>> getListFiles() {
         List<Photo> files = storageService.getAllFiles();
         log.debug(files.toString() + " - files");
@@ -67,7 +68,7 @@ public class PhotoController {
     }
 
 
-    @GetMapping("/photos/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable String id) {
         Photo photo = storageService.getFile(id);
 
