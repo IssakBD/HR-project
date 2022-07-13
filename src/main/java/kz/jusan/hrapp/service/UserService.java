@@ -26,4 +26,6 @@ public interface UserService {
     UserDto fromUser(User user);
 
     Boolean isUsernameExist(String username);
+
+    List<UserDto> getAllUsers();
 }

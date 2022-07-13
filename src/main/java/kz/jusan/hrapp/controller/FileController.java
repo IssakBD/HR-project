@@ -3,10 +3,7 @@ package kz.jusan.hrapp.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
-import kz.jusan.hrapp.message.ResponseFile;
 import kz.jusan.hrapp.message.ResponseMessage;
 import kz.jusan.hrapp.model.FileDB;
 import kz.jusan.hrapp.service.impl.FileStorageServiceImpl;
@@ -17,9 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 @Slf4j
-@Tag(name = "Files")
 @RestController
 @RequestMapping("/files")
 @CrossOrigin("*")

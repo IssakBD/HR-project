@@ -109,12 +109,13 @@ public class UserServiceImpl implements UserService {
 
         Photo photo = user.getPhoto();
         PhotoDto photoDto = new PhotoDto();
-        photoDto.setId(photo.getId());
-        photoDto.setType(photo.getType());
-        photoDto.setName(photo.getName());
-        photoDto.setData(photo.getData());
-        userDto.setPhotoDto(photoDto);
-
+        if(photo != null) {
+            photoDto.setId(photo.getId());
+            photoDto.setType(photo.getType());
+            photoDto.setName(photo.getName());
+            photoDto.setData(photo.getData());
+            userDto.setPhotoDto(photoDto);
+        }
         return userDto;
     }
 
@@ -125,5 +126,16 @@ public class UserServiceImpl implements UserService {
             answer = false;
         }
         return answer;
+    }
+
+    @Override
+    public List<UserDto> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        List<UserDto> userDtos = new ArrayList<>();
+        for (User user : users) {
+            userDtos.add(fromUser(user));
+        }
+
+        return userDtos;
     }
 }

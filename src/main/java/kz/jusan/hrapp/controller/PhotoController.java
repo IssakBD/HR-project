@@ -1,7 +1,5 @@
 package kz.jusan.hrapp.controller;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
-import kz.jusan.hrapp.message.ResponseFile;
 import kz.jusan.hrapp.message.ResponseMessage;
 import kz.jusan.hrapp.model.Photo;
 import kz.jusan.hrapp.service.UserService;
@@ -19,7 +17,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Tag(name = "Photos")
 @RestController
 @RequestMapping("/photos")
 @CrossOrigin("*")

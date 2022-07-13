@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * REST controller user connected requestst.
@@ -46,19 +48,6 @@ public class UserRestControllerV1 {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-//    @GetMapping()
-//    public List<User> getUserById(){
-//        List<User> users = userService.getAll();
-//
-//        for (User user : users) {
-//
-//        }
-//
-//        UserDto result = UserDto.fromUser(user);
-//
-//        return new ResponseEntity<>(result, HttpStatus.OK);
-//    }
-
     @PostMapping("/sign-up")
     public HashMap<String, String> uploadFile(@RequestBody UserRegistrationDto userRegistrationDto) {
         HashMap<String, String> answer = new HashMap<>();
@@ -90,4 +79,16 @@ public class UserRestControllerV1 {
         }
         return answer;
     }
+    @GetMapping("/all")
+    public HashMap<String, List<UserDto>> getAllUsers() {
+        HashMap<String, List<UserDto>> answer = new HashMap<>();
+        try {
+                answer.put("users", userService.getAllUsers());
+            } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return answer;
+    }
+
+
 }

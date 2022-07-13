@@ -27,7 +27,7 @@ public class FormToWordServiceImpl {
     @PostConstruct
     public void keysInit(){
         KEYS.add("FIO");
-        KEYS.add("EXFIO");
+        KEYS.add("EXNAME");
         KEYS.add("BIRTHDAY");
         KEYS.add("ETHNICITY");
         KEYS.add("CITIZENSHIP");
